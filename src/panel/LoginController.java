@@ -21,7 +21,6 @@ public class LoginController implements ActionListener {
 		boolean flag = false;
 		String password = new String(passwordArray);
 		// check is kind of a hack. will need to test more
-		System.out.println(patientModel.listSize());
 		for (int i = 0; i < patientModel.listSize(); i++) {
 			if (userName.equals(patientModel.getUserName(i))
 					&& password.equals(patientModel.getUserPassword(i))) {
