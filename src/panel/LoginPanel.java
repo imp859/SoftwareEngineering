@@ -9,7 +9,8 @@ import javax.swing.*;
 public class LoginPanel extends JFrame{
 	
 	private GridLayout loginLayout = new GridLayout(6, 0, 0, 5);
-	private GridLayout infoLayout = new GridLayout(7, 2, 0, 1);
+	private GridLayout infoLayout = new GridLayout(9, 2, 0, 1);
+	private GridLayout patientLayout = new GridLayout(2, 0, 0, 1);
 	private ImageIcon logo = new ImageIcon("src/panel/pppicture.png");
 	private JPanel panel = new JPanel();
 	private JPanel logoPanel = new JPanel();
@@ -21,6 +22,10 @@ public class LoginPanel extends JFrame{
 	private JTextField existingUser;
 	private JLabel existingPasswordEnter;
 	private JPasswordField existingPassword;
+	
+	private JPanel patientPanel = new JPanel();
+	private JLabel patientTitle = new JLabel("Welcome Patient!", SwingConstants.CENTER);
+	private JButton scheduleAppt = new JButton("Schedule Appointment");
 	
 	private JButton logoButton = new JButton();
 	private JButton newUser = new JButton("New User");
@@ -35,10 +40,14 @@ public class LoginPanel extends JFrame{
 	private JLabel typeEnter = new JLabel("User Type:");
 	private JLabel usernameEnter = new JLabel("Username:");
 	private JLabel passwordEnter = new JLabel("Password:");
+	private JLabel phoneNumberEnter = new JLabel("Phone Number:");
+	private JLabel addressEnter = new JLabel("Address:");
 	private JTextField firstName = new JTextField(20);
 	private JTextField lastName = new JTextField(20);
 	private JTextField email = new JTextField(20);
 	private JTextField userName = new JTextField(20);
+	private JTextField phoneNumber = new JTextField(20);
+	private JTextField address = new JTextField(20);
 	private JPasswordField password = new JPasswordField(20);
 	private String[] types = {"Patient", "Doctor", "Nurse", "Staff"};
 	private JComboBox userType = new JComboBox(types);
@@ -71,7 +80,14 @@ public class LoginPanel extends JFrame{
 		newUserPanel.add(userName);
 		newUserPanel.add(passwordEnter);
 		newUserPanel.add(password);
+		newUserPanel.add(phoneNumberEnter);
+		newUserPanel.add(phoneNumber);
+		newUserPanel.add(addressEnter);
+		newUserPanel.add(address);
 		newUserPanel.add(submit);
+		patientPanel.setLayout(patientLayout);
+		patientPanel.add(patientTitle);
+		patientPanel.add(scheduleAppt);
 		
 		loginPanel = new JPanel(new GridLayout(3, 2, 0, 0));
 		existingUserEnter = new JLabel("UserName: ");
@@ -89,8 +105,10 @@ public class LoginPanel extends JFrame{
 		add(panel, BorderLayout.SOUTH);
 		add(newUserPanel, BorderLayout.SOUTH);
 		add(loginPanel, BorderLayout.SOUTH);
+		add(patientPanel, BorderLayout.SOUTH);
 		newUserPanel.setVisible(false);
 		loginPanel.setVisible(false);
+		patientPanel.setVisible(false);
 	}
 	
 	public void registerListeners(LoginController lc){
@@ -107,6 +125,8 @@ public class LoginPanel extends JFrame{
 		email.setText("");
 		userName.setText("");
 		password.setText("");
+		phoneNumber.setText("");
+		address.setText("");
 	}
 	
 	public void resetPassword(){
@@ -118,6 +138,8 @@ public class LoginPanel extends JFrame{
 	public void checkUser(LoginController lc){
 		try {
 			lc.checkCredentials(existingUser.getText(), existingPassword.getPassword());
+			loginPanel.setVisible(false);
+			patientPanel.setVisible(true);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(signIn, "Invalid Credentials");
 		}
@@ -133,6 +155,10 @@ public class LoginPanel extends JFrame{
 	
 	public JPanel getNewUserPanel(){
 		return this.newUserPanel;
+	}
+	
+	public JPanel getPatientPanel(){
+		return this.patientPanel;
 	}
 	
 }

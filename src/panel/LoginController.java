@@ -62,6 +62,7 @@ public class LoginController implements ActionListener {
 			view.getMainPanel().setVisible(true);
 			view.getNewUserPanel().setVisible(false);
 			view.getLoginPanel().setVisible(false);
+			view.getPatientPanel().setVisible(false);
 		}
 	}
 
