@@ -3,8 +3,12 @@ package panel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 import javax.swing.*;
+
+import sun.audio.*;
 
 public class LoginPanel extends JFrame{
 	
@@ -52,9 +56,24 @@ public class LoginPanel extends JFrame{
 	private String[] types = {"Patient", "Doctor", "Nurse", "Staff"};
 	private JComboBox userType = new JComboBox(types);
 	
+	private InputStream chimeStream;
+	private AudioStream chime;
+	
+	private InputStream noticeStream;
+	private AudioStream notice;
+	
 	public LoginPanel(){
 		super("Patient Portal");
 		setLayout(new FlowLayout());
+		
+		try {
+			chimeStream = new FileInputStream("src/panel/chime.wav");
+			chime = new AudioStream(chimeStream);
+			noticeStream = new FileInputStream("src/panel/notice_chime.wav");
+			notice = new AudioStream(noticeStream);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 
 		int scale = 2;
 		int width = logo.getIconWidth();
@@ -140,7 +159,9 @@ public class LoginPanel extends JFrame{
 			lc.checkCredentials(existingUser.getText(), existingPassword.getPassword());
 			loginPanel.setVisible(false);
 			patientPanel.setVisible(true);
+			AudioPlayer.player.start(chime);
 		} catch (Exception e) {
+			AudioPlayer.player.start(notice);
 			JOptionPane.showMessageDialog(signIn, "Invalid Credentials");
 		}
 	}
