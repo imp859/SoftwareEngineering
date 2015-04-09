@@ -148,7 +148,6 @@ public class LoginPanel extends JFrame{
 	
 	public void checkAppt(){
 		JOptionPane.showMessageDialog(scheduleAppt, "Appointment Scheduled");
-		//throw flags
 	}
 	
 	public JPanel getLoginPanel(){
