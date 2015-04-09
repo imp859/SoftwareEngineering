@@ -1,15 +1,12 @@
 package panel;
 
-import java.util.ArrayList;
+public class PatientModel extends UserModel{
 
-public class PatientModel {
-
-	private ArrayList<String> userName;
-	private ArrayList<String> userPassword;
+	//private ArrayList<String> userName;
+	//private ArrayList<String> userPassword;
+	private int appt;
 	
 	public PatientModel(){
-		userName = new ArrayList<String>();
-		userPassword = new ArrayList<String>();
 		// store string temporarily to test authentication.
 		userName.add("patient");
 		userPassword.add("password");
@@ -19,7 +16,7 @@ public class PatientModel {
 		
 		userName.add("patient3");
 		userPassword.add("password3");
-	}
+	}	
 	
 	public int listSize(){
 		return this.userName.size();
@@ -31,6 +28,21 @@ public class PatientModel {
 	
 	public String getUserPassword(int index){
 		return this.userPassword.get(index);
+	}
+	
+	// call this when clicking schedule appointment
+	public void setAppt(){
+		appt = 1;
+	}
+	
+	// for the staff and doctor(maybe?) view
+	public int getAppt(){
+		return appt;
+	}
+
+	@Override
+	public int getUserType() {
+		return 1;
 	}
 	
 }
