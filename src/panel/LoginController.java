@@ -58,6 +58,9 @@ public class LoginController implements ActionListener {
 		} else if (action.equals("Sign In")) {
 			view.checkUser(this);
 			view.resetPassword();
+		} else if (action.equals("Schedule Appointment")) {
+			view.checkAppt();
+			System.out.print("a");
 		} else {
 			view.resetFields();
 			view.getMainPanel().setVisible(true);

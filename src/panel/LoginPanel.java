@@ -117,6 +117,7 @@ public class LoginPanel extends JFrame{
 		logoButton.addActionListener(lc);
 		submit.addActionListener(lc);
 		signIn.addActionListener(lc);
+		scheduleAppt.addActionListener(lc);
 	}
 	
 	public void resetFields(){
@@ -143,6 +144,11 @@ public class LoginPanel extends JFrame{
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(signIn, "Invalid Credentials");
 		}
+	}
+	
+	public void checkAppt(){
+		JOptionPane.showMessageDialog(scheduleAppt, "Appointment Scheduled");
+		//throw flags
 	}
 	
 	public JPanel getLoginPanel(){
