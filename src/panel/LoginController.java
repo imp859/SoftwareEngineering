@@ -3,10 +3,13 @@ package panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.SwingConstants;
+
 public class LoginController implements ActionListener {
 
 	private LoginPanel view;
 	private PatientModel patientModel;
+	private String patient;
 
 	public LoginController(LoginPanel otherView, PatientModel otherPatientModel) {
 		this.view = otherView;
@@ -25,6 +28,7 @@ public class LoginController implements ActionListener {
 			if (userName.equals(patientModel.getUserName(i))
 					&& password.equals(patientModel.getUserPassword(i))) {
 				int userTypeID = patientModel.getUserType();
+				patient = patientModel.getUserName(i);
 				Session session = new Session();
 				session.getSession(userTypeID);
 				return session;
@@ -54,6 +58,9 @@ public class LoginController implements ActionListener {
 			// TODO call controller checkCredenials in view
 		} else if (action.equals("Sign In")) {
 			view.checkUser(this);
+			// deciding whether this would be better to do in view or to leave here
+			view.getPatientTitleText().setText(patient);
+			view.getPatientTitleText().setHorizontalAlignment(SwingConstants.CENTER);
 			view.resetPassword();
 		} else if (action.equals("Schedule Appointment")){
 			patientModel.setAppt();

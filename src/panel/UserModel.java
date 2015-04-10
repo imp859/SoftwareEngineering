@@ -8,5 +8,6 @@ public abstract class UserModel {
 	protected ArrayList<String> userPassword = new ArrayList<String>();
 	
 	public abstract int getUserType();
+	public abstract void addUser(String name, String password);
 	
 }
