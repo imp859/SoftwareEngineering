@@ -5,34 +5,45 @@ public class PatientModel extends UserModel{
 	//private ArrayList<String> userName;
 	//private ArrayList<String> userPassword;
 	private int appt;
+	private String firstname, lastname, password, userName;
 	
-	public PatientModel(){
-		// store string temporarily to test authentication.
-		userName.add("patient");
-		userPassword.add("password");
-		
-		userName.add("patient2");
-		userPassword.add("password2");
-		
-		userName.add("patient3");
-		userPassword.add("password3");
+	
+	//eventually all textfield info from view will be passed into constructor
+	public PatientModel(String firstName, String lastName, String userName){
+		// TODO enforce better constraints
+		this.firstname = firstName;
+		this.lastname = lastName;
+		this.userName = userName;
 	}	
 	
-	public int listSize(){
-		return this.userName.size();
-	}
-	
-	public String getUserName(int index){
-		return this.userName.get(index);
-	}
-	
-	public String getUserPassword(int index){
-		return this.userPassword.get(index);
-	}
 	
 	// call this when clicking schedule appointment
 	public void setAppt(){
 		appt = 1;
+	}
+	
+	public void setPassword(String otherPassword){
+		password = otherPassword;
+	}
+	
+	public String getPassword(){
+		return password;
+	}
+	
+	public void setFirstName(String name){
+		firstname = name;
+	}
+	
+	public void setLastName(String name){
+		lastname = name;
+	}
+	
+	public String getFirstName(){
+		return firstname;
+	}
+	
+	public String getUserName(){
+		return this.userName;
 	}
 	
 	// for the staff and doctor(maybe?) view
@@ -43,6 +54,12 @@ public class PatientModel extends UserModel{
 	@Override
 	public int getUserType() {
 		return 1;
+	}
+
+	@Override
+	public void addUser(String name, String password) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

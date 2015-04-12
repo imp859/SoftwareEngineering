@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.swing.*;
@@ -28,7 +30,7 @@ public class LoginPanel extends JFrame{
 	private JPasswordField existingPassword;
 	
 	private JPanel patientPanel = new JPanel();
-	private JLabel patientTitle = new JLabel("Welcome Patient!", SwingConstants.CENTER);
+	private JLabel patientTitle; // = new JLabel("Welcome Patient!", SwingConstants.CENTER);
 	private JButton scheduleAppt = new JButton("Schedule Appointment");
 	
 	private JButton logoButton = new JButton();
@@ -62,6 +64,7 @@ public class LoginPanel extends JFrame{
 	private InputStream noticeStream;
 	private AudioStream notice;
 	
+	
 	public LoginPanel(){
 		super("Patient Portal");
 		setLayout(new FlowLayout());
@@ -69,8 +72,7 @@ public class LoginPanel extends JFrame{
 		try {
 			chimeStream = new FileInputStream("src/panel/chime.wav");
 			chime = new AudioStream(chimeStream);
-			noticeStream = new FileInputStream("src/panel/notice_chime.wav");
-			notice = new AudioStream(noticeStream);
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -105,6 +107,9 @@ public class LoginPanel extends JFrame{
 		newUserPanel.add(address);
 		newUserPanel.add(submit);
 		patientPanel.setLayout(patientLayout);
+		
+		patientTitle = new JLabel();
+		
 		patientPanel.add(patientTitle);
 		patientPanel.add(scheduleAppt);
 		
@@ -149,28 +154,67 @@ public class LoginPanel extends JFrame{
 		address.setText("");
 	}
 	
+	public String getNewFirstName(){
+		return firstName.getText();
+	}
+	
+	public String getNewLastName(){
+		return lastName.getText();
+	}
+	
+	public String getNewUserName(){
+		return userName.getText();
+	}
+	
+	public char[] getNewPassword(){
+		return password.getPassword();
+	}
+	
 	public void resetPassword(){
 		existingUser.setText("");
 		existingPassword.setText("");
 	}
 	
+	public JLabel getPatientTitleText(){
+		return this.patientTitle;
+	}
+	
 	//temporary check method to test authentication
 	public void checkUser(LoginController lc){
 		try {
+			/*
+			 * suggestion: here we can do the instantiation of a new session based upon checkCredentials
+			 * result. that session would then determine which view to show
+			 */
 			lc.checkCredentials(existingUser.getText(), existingPassword.getPassword());
 			loginPanel.setVisible(false);
 			patientPanel.setVisible(true);
 			AudioPlayer.player.start(chime);
 		} catch (Exception e) {
+			try {
+				noticeStream = new FileInputStream("src/panel/notice_chime.wav");
+				notice = new AudioStream(noticeStream);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
 			AudioPlayer.player.start(notice);
 			JOptionPane.showMessageDialog(signIn, "Invalid Credentials");
 		}
 	}
 	
-	public void setApptNotification(){
-		JOptionPane.showMessageDialog(scheduleAppt, "Your appointment request has been sent");
+	public void setApptNotification(int flag) {
+		if (flag == 1) {
+			JOptionPane.showMessageDialog(scheduleAppt,
+					"Your appointment request has been sent");
+		} else {
+			JOptionPane.showMessageDialog(scheduleAppt,
+					"You do not have permission to do that");
+		}
 	}
-	
+
 	public JPanel getLoginPanel(){
 		return this.loginPanel;
 	}

@@ -1,20 +1,29 @@
 package panel;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 public class PatientPortalMain {
 
 	public static void main(String[] args) {
-		Dimension minimumSize = new Dimension(700, 500);
+		// arraylist of abstract users
+		ArrayList<UserModel> users = new ArrayList<UserModel>();
+		/*hardcoded users and fields for testing*/
+		PatientModel p = new PatientModel("john", "doe", "john");
+		p.setPassword("password");
+		PatientModel q = new PatientModel("patient", "name", "patient");
+		q.setPassword("password2");
+		users.add(p);
+		users.add(q);
+		Dimension minimumSize = new Dimension(800, 600);
 		LoginPanel lp = new LoginPanel();
-		PatientModel pm = new PatientModel();
-		LoginController lc = new LoginController(lp, pm);
+		LoginController lc = new LoginController(lp, users);
 		
 		lp.registerListeners(lc);
 		
-		lp.setSize(700, 500);
+		lp.setSize(800, 600);
 		lp.setMinimumSize(minimumSize);
 		lp.setResizable(true);
 		lp.setVisible(true);
