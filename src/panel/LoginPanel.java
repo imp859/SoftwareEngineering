@@ -154,6 +154,22 @@ public class LoginPanel extends JFrame{
 		address.setText("");
 	}
 	
+	public String getNewFirstName(){
+		return firstName.getText();
+	}
+	
+	public String getNewLastName(){
+		return lastName.getText();
+	}
+	
+	public String getNewUserName(){
+		return userName.getText();
+	}
+	
+	public char[] getNewPassword(){
+		return password.getPassword();
+	}
+	
 	public void resetPassword(){
 		existingUser.setText("");
 		existingPassword.setText("");
@@ -189,10 +205,16 @@ public class LoginPanel extends JFrame{
 		}
 	}
 	
-	public void setApptNotification(){
-		JOptionPane.showMessageDialog(scheduleAppt, "Your appointment request has been sent");
+	public void setApptNotification(int flag) {
+		if (flag == 1) {
+			JOptionPane.showMessageDialog(scheduleAppt,
+					"Your appointment request has been sent");
+		} else {
+			JOptionPane.showMessageDialog(scheduleAppt,
+					"You do not have permission to do that");
+		}
 	}
-	
+
 	public JPanel getLoginPanel(){
 		return this.loginPanel;
 	}
