@@ -15,9 +15,11 @@ public class PatientPortalMain {
 		p.setPassword("password");
 		PatientModel q = new PatientModel("patient", "name", "patient");
 		q.setPassword("password2");
+		// add two patients to user list
 		users.add(p);
 		users.add(q);
 		Dimension minimumSize = new Dimension(800, 600);
+		// create the login screen and initialize its controller
 		LoginPanel lp = new LoginPanel();
 		LoginController lc = new LoginController(lp, users);
 		

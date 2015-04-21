@@ -12,13 +12,20 @@ import javax.swing.*;
 
 import sun.audio.*;
 
+/***
+ * initial screen to login or create a user.
+ * @author Stephen's Laptop
+ *
+ */
+
 public class LoginPanel extends JFrame{
 	
-	private GridLayout loginLayout = new GridLayout(6, 0, 0, 5);
-	private GridLayout infoLayout = new GridLayout(9, 2, 0, 1);
+	private PatientView patientView;
+	private GridLayout loginLayout = new GridLayout(6, 0, 0, 5); //initial home screen layout
+	private GridLayout infoLayout = new GridLayout(9, 2, 0, 1); // new user layout
 	private GridLayout patientLayout = new GridLayout(2, 0, 0, 1);
 	private ImageIcon logo = new ImageIcon("src/panel/pppicture.png");
-	private JPanel panel = new JPanel();
+	private JPanel panel = new JPanel(); // initial home screen panel
 	private JPanel logoPanel = new JPanel();
 	private JPanel newUserPanel = new JPanel();
 	
@@ -82,12 +89,14 @@ public class LoginPanel extends JFrame{
 		int newWidth = width / scale;
 		logoButton.setIcon(new ImageIcon(logo.getImage().getScaledInstance(newWidth, -1, Image.SCALE_SMOOTH)));
 		logoPanel.add(logoButton);
+		// add layout and buttons to initial screen
 		panel.setLayout(loginLayout);
 		panel.add(title);
 		panel.add(descriptionOne);
 		panel.add(descriptionTwo);
 		panel.add(newUser);
 		panel.add(login);
+		/*add layout, textfields, and buttons to new user panel*/
 		newUserPanel.setLayout(infoLayout);
 		newUserPanel.add(nameOne);
 		newUserPanel.add(firstName);
@@ -106,19 +115,23 @@ public class LoginPanel extends JFrame{
 		newUserPanel.add(addressEnter);
 		newUserPanel.add(address);
 		newUserPanel.add(submit);
+		// exisiting patient layout and panel
 		patientPanel.setLayout(patientLayout);
 		
+		/*
 		patientTitle = new JLabel();
 		
 		patientPanel.add(patientTitle);
-		patientPanel.add(scheduleAppt);
+		patientPanel.add(scheduleAppt);*/
 		
 		loginPanel = new JPanel(new GridLayout(3, 2, 0, 0));
+		// creating relevant buttons and textfields
 		existingUserEnter = new JLabel("UserName: ");
 		existingUser = new JTextField(20);
 		existingPasswordEnter = new JLabel("PassWord: ");
 		existingPassword = new JPasswordField(20);
 		signIn = new JButton("Sign In");		
+		// adding them to panel
 		loginPanel.add(existingUserEnter);
 		loginPanel.add(existingUser);
 		loginPanel.add(existingPasswordEnter);
@@ -130,11 +143,13 @@ public class LoginPanel extends JFrame{
 		add(newUserPanel, BorderLayout.SOUTH);
 		add(loginPanel, BorderLayout.SOUTH);
 		add(patientPanel, BorderLayout.SOUTH);
+		// hide panels
 		newUserPanel.setVisible(false);
 		loginPanel.setVisible(false);
 		patientPanel.setVisible(false);
 	}
 	
+	// adds action listeners for relevant buttons
 	public void registerListeners(LoginController lc){
 		login.addActionListener(lc);
 		newUser.addActionListener(lc);
@@ -143,7 +158,7 @@ public class LoginPanel extends JFrame{
 		signIn.addActionListener(lc);
 		scheduleAppt.addActionListener(lc);
 	}
-	
+	// clears information in textfields. usually upon hitting home button
 	public void resetFields(){
 		firstName.setText("");
 		lastName.setText("");
@@ -154,6 +169,11 @@ public class LoginPanel extends JFrame{
 		address.setText("");
 	}
 	
+	public String getComboBoxSelection(){
+		return (String)userType.getSelectedItem();
+	}
+	
+	/*returns the contents of a JTextField*/
 	public String getNewFirstName(){
 		return firstName.getText();
 	}
@@ -180,18 +200,18 @@ public class LoginPanel extends JFrame{
 	}
 	
 	//temporary check method to test authentication
-	public void checkUser(LoginController lc){
+	public int checkUser(LoginController lc){
+		// called in controller. checks for a valid user. catches error if invalid
 		try {
-			/*
-			 * suggestion: here we can do the instantiation of a new session based upon checkCredentials
-			 * result. that session would then determine which view to show
-			 */
+			// passed the username and password into checkCredentials method in controller
 			lc.checkCredentials(existingUser.getText(), existingPassword.getPassword());
-			loginPanel.setVisible(false);
-			patientPanel.setVisible(true);
+			//loginPanel.setVisible(false);
+			//panel.setVisible(true);
 			AudioPlayer.player.start(chime);
+			return 1;
 		} catch (Exception e) {
 			try {
+				// error checks wav file
 				noticeStream = new FileInputStream("src/panel/notice_chime.wav");
 				notice = new AudioStream(noticeStream);
 			} catch (FileNotFoundException e1) {
@@ -201,7 +221,9 @@ public class LoginPanel extends JFrame{
 			}
 			
 			AudioPlayer.player.start(notice);
+			// popup showing invalid credentials
 			JOptionPane.showMessageDialog(signIn, "Invalid Credentials");
+			return 0;
 		}
 	}
 	
@@ -214,7 +236,7 @@ public class LoginPanel extends JFrame{
 					"You do not have permission to do that");
 		}
 	}
-
+	/*returns a JPanel*/
 	public JPanel getLoginPanel(){
 		return this.loginPanel;
 	}
