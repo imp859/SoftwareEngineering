@@ -1,9 +1,15 @@
 package panel;
 
+
+/***
+ * stores information about a patient. bunch
+ * of getters and setters
+ * @author Stephen's Laptop
+ *
+ */
+
 public class PatientModel extends UserModel{
 
-	//private ArrayList<String> userName;
-	//private ArrayList<String> userPassword;
 	private int appt;
 	private String firstname, lastname, password, userName;
 	
@@ -50,16 +56,19 @@ public class PatientModel extends UserModel{
 	public int getAppt(){
 		return appt;
 	}
-
-	@Override
-	public int getUserType() {
-		return 1;
+	
+	public String getLastName(){
+		return this.lastname;
 	}
 
-	@Override
+	public int getUserType() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 	public void addUser(String name, String password) {
 		// TODO Auto-generated method stub
 		
 	}
-	
 }
