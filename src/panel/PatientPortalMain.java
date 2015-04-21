@@ -19,7 +19,7 @@ public class PatientPortalMain {
 		users.add(p);
 		users.add(q);
 		Dimension minimumSize = new Dimension(800, 600);
-		// create the login screen and initialize its controller
+		// create the login screen and initialize controller
 		LoginPanel lp = new LoginPanel();
 		LoginController lc = new LoginController(lp, users);
 		
