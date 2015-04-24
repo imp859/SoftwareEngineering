@@ -35,6 +35,7 @@ public class LoginPanel extends JFrame{
 	private JButton newUser = new JButton("New User");
 	private JButton login = new JButton("Login");
 	private JButton submit = new JButton("Submit");
+	private JButton back = new JButton("Back");
 	private JLabel title = new JLabel("Welcome to the Patient Portal System!", SwingConstants.CENTER);
 	private JLabel descriptionOne = new JLabel("If you are new to the system, please click \"NewUser\" to create an account", SwingConstants.CENTER);
 	private JLabel descriptionTwo = new JLabel("Otherwise, please click \"Login\"", SwingConstants.CENTER);
@@ -104,6 +105,7 @@ public class LoginPanel extends JFrame{
 		newUserPanel.add(addressEnter);
 		newUserPanel.add(address);
 		newUserPanel.add(submit);
+		newUserPanel.add(back);
 		patientPanel.setLayout(patientLayout);
 		patientPanel.add(patientTitle);
 		patientPanel.add(scheduleAppt);
@@ -119,6 +121,7 @@ public class LoginPanel extends JFrame{
 		loginPanel.add(existingPasswordEnter);
 		loginPanel.add(existingPassword);
 		loginPanel.add(signIn);
+		loginPanel.add(back);
 		
 		add(logoPanel, BorderLayout.NORTH);
 		add(panel, BorderLayout.SOUTH);
@@ -135,6 +138,7 @@ public class LoginPanel extends JFrame{
 		newUser.addActionListener(lc);
 		logoButton.addActionListener(lc);
 		submit.addActionListener(lc);
+		back.addActionListener(lc);
 		signIn.addActionListener(lc);
 		scheduleAppt.addActionListener(lc);
 	}
