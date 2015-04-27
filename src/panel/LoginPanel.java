@@ -1,8 +1,6 @@
 package panel;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,7 +18,7 @@ import sun.audio.*;
 
 public class LoginPanel extends JFrame{
 	
-	private PatientView patientView;
+	//private PatientView patientView;
 	private GridLayout loginLayout = new GridLayout(6, 0, 0, 5); //initial home screen layout
 	private GridLayout infoLayout = new GridLayout(9, 2, 0, 1); // new user layout
 	private GridLayout patientLayout = new GridLayout(2, 0, 0, 1);
@@ -186,6 +184,18 @@ public class LoginPanel extends JFrame{
 		return userName.getText();
 	}
 	
+	public String getNewUserEmail(){
+		return email.getText();
+	}
+	
+	public String getNewUserAddress(){
+		return address.getText();
+	}
+	
+	public String getNewUserPhoneNum(){
+		return phoneNumber.getText();
+	}
+	
 	public char[] getNewPassword(){
 		return password.getPassword();
 	}
@@ -205,8 +215,6 @@ public class LoginPanel extends JFrame{
 		try {
 			// passed the username and password into checkCredentials method in controller
 			lc.checkCredentials(existingUser.getText(), existingPassword.getPassword());
-			//loginPanel.setVisible(false);
-			//panel.setVisible(true);
 			AudioPlayer.player.start(chime);
 			return 1;
 		} catch (Exception e) {
@@ -226,16 +234,7 @@ public class LoginPanel extends JFrame{
 			return 0;
 		}
 	}
-	
-	public void setApptNotification(int flag) {
-		if (flag == 1) {
-			JOptionPane.showMessageDialog(scheduleAppt,
-					"Your appointment request has been sent");
-		} else {
-			JOptionPane.showMessageDialog(scheduleAppt,
-					"You do not have permission to do that");
-		}
-	}
+
 	/*returns a JPanel*/
 	public JPanel getLoginPanel(){
 		return this.loginPanel;

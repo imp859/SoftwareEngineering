@@ -18,8 +18,14 @@ public abstract class UserModel {
 	public abstract String getFirstName();
 	public abstract void setFirstName(String name);
 	public abstract void setLastName(String name);
+	public abstract void setEmail(String email);
+	public abstract void setPhoneNum(String phoneNum);
+	public abstract void setAddress(String address);
 	public abstract String getLastName();
 	public abstract String getPassword();
 	public abstract String getUserName();
 	public abstract void setAppt();
+	public abstract String getEmail();
+	public abstract String getPhoneNum();
+	public abstract String getAddress();
 }
