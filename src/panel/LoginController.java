@@ -53,21 +53,6 @@ public class LoginController implements ActionListener {
 		//throwing exception which generates JOptionPane in view. user was not found
 		throw new Exception();
 	}
-	
-	/*public PatientModel initNewUser() {
-		// pass fields from view into patient model
-		// ignore this if statement
-		if (view.getComboBoxSelection().equalsIgnoreCase("Doctor")) {
-			System.out.println("you selected doctor");
-		}
-		// create new user with information in home screen textfields
-		PatientModel newUser = new PatientModel(view.getNewFirstName(),
-				view.getNewLastName(), view.getNewUserName(),
-				view.getNewPassword(), view.getNewUserEmail(), view.getNewUserPhoneNum(),
-				view.getNewUserAddress());
-		return newUser;
-
-	}*/
 
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
@@ -106,19 +91,13 @@ public class LoginController implements ActionListener {
 			// make sure this user is a patient						
 				if(view.checkUser(this) == 1){
 				/* pass information about patient from model into patients view*/
-					createUser.createPatientView(index, session);
-				/*patientView = new PatientView(users.get(index).getUserName(),
-						users.get(index).getFirstName(), users.get(index)
-								.getLastName(), users.get(index).getPassword(),
-						users.get(index).getEmail(), users.get(index)
-								.getPhoneNum(), users.get(index).getAddress());
-				/*initialize patient controller with the patient view and the specific patient model at index
-				PatientController pc = new PatientController(patientView, users.get(index), session);
-				patientView.registerListeners(pc);
-				patientView.setVisible(true);
-				patientView.setSize(350, 300);
-				patientView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				*/}			
+					if(users.get(index).getUserType() == 0){
+					 createUser.createPatientView(index, session);
+					} else if(users.get(index).getUserType() == 1){
+						createUser.createDoctorView(index, session);
+					}
+					
+				}			
 			view.resetPassword();
 		}
 		else {

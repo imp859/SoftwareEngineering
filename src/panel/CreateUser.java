@@ -19,6 +19,7 @@ public class CreateUser {
 	public PatientController pc;
 	public DoctorModel doctorModel;
 	public PatientView patientView;
+	private DoctorView doctorView;
 	public LoginPanel loginPanel;
 	public ArrayList<UserModel> users;
 	
@@ -55,7 +56,15 @@ public class CreateUser {
 	
 	public void createDoctorView(int index, Session session){
 		// create new Doctor View
-		
+		doctorView = new DoctorView(users.get(index).getUserName(), users
+				.get(index).getFirstName(), users.get(index).getLastName(),
+				users.get(index).getPassword(), users.get(index).getEmail(),
+				users);
+		DoctorController dc = new DoctorController(doctorView, users.get(index), session);
+		doctorView.registerListeners(dc);
+		doctorView.setVisible(true);
+		doctorView.setSize(600, 350);
+		doctorView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	

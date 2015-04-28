@@ -13,8 +13,8 @@ public class DoctorModel extends UserModel{
 	
 	public DoctorModel(String firstName, String lastName, String userName,
 			char[] otherPassword, String email, String address, String phoneNum){
-		this.firstname = firstname;
-		this.lastname = lastname;
+		this.firstname = firstName;
+		this.lastname = lastName;
 		if(otherPassword != null){
 			String tmpPassword = new String(otherPassword);
 			this.password = tmpPassword;
