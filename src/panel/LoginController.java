@@ -13,6 +13,7 @@ public class LoginController implements ActionListener {
 	private PatientView patientView;
 	private Session session;
 	private PatientModel patientModel;
+	private CreateUser createUser;
 	private ArrayList<UserModel> users;
 	private String patient;
 	private int index;
@@ -21,6 +22,7 @@ public class LoginController implements ActionListener {
 	public LoginController(LoginPanel otherView, ArrayList otherUserModel) {
 		this.view = otherView; // assign this view to the view that was passed
 		session = new Session(); //create new session
+		createUser = new CreateUser(otherView, otherUserModel);
 		this.users = otherUserModel;
 	}
 
@@ -52,19 +54,20 @@ public class LoginController implements ActionListener {
 		throw new Exception();
 	}
 	
-	public PatientModel initNewUser(){
+	/*public PatientModel initNewUser() {
 		// pass fields from view into patient model
 		// ignore this if statement
-		if(view.getComboBoxSelection().equalsIgnoreCase("Doctor")){
+		if (view.getComboBoxSelection().equalsIgnoreCase("Doctor")) {
 			System.out.println("you selected doctor");
 		}
 		// create new user with information in home screen textfields
-		PatientModel newUser = new PatientModel(view.getNewFirstName(), view.getNewLastName(), view.getNewUserName());
-		String password = new String(view.getNewPassword());
-		newUser.setPassword(password); // set a password. will eventually be passed in the constructor
+		PatientModel newUser = new PatientModel(view.getNewFirstName(),
+				view.getNewLastName(), view.getNewUserName(),
+				view.getNewPassword(), view.getNewUserEmail(), view.getNewUserPhoneNum(),
+				view.getNewUserAddress());
 		return newUser;
-		
-	}
+
+	}*/
 
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
@@ -74,42 +77,49 @@ public class LoginController implements ActionListener {
 			view.getNewUserPanel().setVisible(true);
 			view.getLoginPanel().setVisible(false);
 		} else if (action.equals("Submit")) {
-			// crates a new user and returns to home screen
+			// creates a new user and returns to home screen
 			view.getMainPanel().setVisible(true);
 			view.getLoginPanel().setVisible(false);
 			view.getNewUserPanel().setVisible(false);
-			PatientModel p = initNewUser(); // create new patient
-			users.add(p); // add user to arraylist
+			if(view.getComboBoxSelection().equals("Patient")){
+				users.add(createUser.createPatient()); // add user to arraylist
+			} else if(view.getComboBoxSelection().equals("Doctor")){
+				if(createUser.authenticateNewUser() == 1){
+					users.add(createUser.createDoctor()); // Create doctor
+				}
+			} else if(view.getComboBoxSelection().equals("Nurse")){
+				if(createUser.authenticateNewUser() == 2){
+					//Create nurse
+				}
+			} else if(view.getComboBoxSelection().equals("Staff")){
+				if(createUser.authenticateNewUser() == 3){
+					//Create staff
+				}
+			}
 			view.resetFields(); // set textfields to "" string
 		} else if (action.equals("Login")) {
 			// sets existing patient login screen visible
 			view.getMainPanel().setVisible(false);
 			view.getNewUserPanel().setVisible(false);
 			view.getLoginPanel().setVisible(true);
-		} else if (action.equals("Sign In")) {
-			// make sure this user is a patient
-			if(view.checkUser(this) == 1){
-				// pass existing information about patient from model into patients view
-				patientView = new PatientView(users.get(index).getUserName(),
+		} else if (action.equals("Sign In")) {		
+			// make sure this user is a patient						
+				if(view.checkUser(this) == 1){
+				/* pass information about patient from model into patients view*/
+					createUser.createPatientView(index, session);
+				/*patientView = new PatientView(users.get(index).getUserName(),
 						users.get(index).getFirstName(), users.get(index)
-								.getLastName(), users.get(index).getPassword());
-				// initialize patient controoler with the patient view and the specific patient model at index
-				PatientController pc = new PatientController(patientView, users.get(index));
+								.getLastName(), users.get(index).getPassword(),
+						users.get(index).getEmail(), users.get(index)
+								.getPhoneNum(), users.get(index).getAddress());
+				/*initialize patient controller with the patient view and the specific patient model at index
+				PatientController pc = new PatientController(patientView, users.get(index), session);
 				patientView.registerListeners(pc);
 				patientView.setVisible(true);
-				patientView.setSize(600, 600);
+				patientView.setSize(350, 300);
 				patientView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			}
-			
-			//view.getPatientTitleText().setText(patient);
-			//view.getPatientTitleText().setHorizontalAlignment(SwingConstants.CENTER);
+				*/}			
 			view.resetPassword();
-		} else if (action.equals("Schedule Appointment")){
-			// check if this user has permission to schedule appt.
-			if(users.get(index).getUserType() == 1){
-			  users.get(index).setAppt();
-			}
-			view.setApptNotification(users.get(index).getUserType());
 		}
 		else {
 			view.resetFields();
