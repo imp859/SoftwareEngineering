@@ -73,14 +73,6 @@ public class LoginPanel extends JFrame{
 	public LoginPanel(){
 		super("Patient Portal");
 		setLayout(new FlowLayout());
-		
-		try {
-			chimeStream = new FileInputStream("src/panel/chime.wav");
-			chime = new AudioStream(chimeStream);
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
 
 		int scale = 2;
 		int width = logo.getIconWidth();
@@ -215,6 +207,13 @@ public class LoginPanel extends JFrame{
 		try {
 			// passed the username and password into checkCredentials method in controller
 			lc.checkCredentials(existingUser.getText(), existingPassword.getPassword());
+			try {
+				chimeStream = new FileInputStream("src/panel/chime.wav");
+				chime = new AudioStream(chimeStream);
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 			AudioPlayer.player.start(chime);
 			return 1;
 		} catch (Exception e) {
