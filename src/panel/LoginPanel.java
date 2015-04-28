@@ -235,6 +235,12 @@ public class LoginPanel extends JFrame{
 	}
 
 	/*returns a JPanel*/
+	
+	public void setApptNotification(){
+		AudioPlayer.player.start(notice);
+		JOptionPane.showMessageDialog(scheduleAppt, "Your appointment request has been sent");
+	}
+
 	public JPanel getLoginPanel(){
 		return this.loginPanel;
 	}
