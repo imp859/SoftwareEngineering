@@ -207,6 +207,9 @@ public class LoginPanel extends JFrame{
 		try {
 			// passed the username and password into checkCredentials method in controller
 			lc.checkCredentials(existingUser.getText(), existingPassword.getPassword());
+
+			//AudioPlayer.player.start(chime);
+
 			try {
 				chimeStream = new FileInputStream("src/panel/chime.wav");
 				chime = new AudioStream(chimeStream);
@@ -215,6 +218,7 @@ public class LoginPanel extends JFrame{
 				e.printStackTrace();
 			}
 			AudioPlayer.player.start(chime);
+
 			return 1;
 		} catch (Exception e) {
 			try {
