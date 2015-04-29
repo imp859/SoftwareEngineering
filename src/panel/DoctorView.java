@@ -17,13 +17,13 @@ public class DoctorView extends JFrame{
 	private JLabel greeting;
 	private JButton updateInfo, changePassword, viewCalendar;
 	private JTextField emailText;
-	private JComboBox patients;
-	private JPanel panel;
+	private JList patients;
+	private JPanel panel, westPanel;
 	private GridBagConstraints g;
 
 	// constructor passes in the patients information
 	public DoctorView(String userNameText, String firstName, String lastName, String passWord,
-			String email, ArrayList patientList){
+			String email, ArrayList<UserModel> patientList){
 		super("Welcome " + userNameText + "!");
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BorderLayout());
@@ -73,7 +73,7 @@ public class DoctorView extends JFrame{
 		g.gridx = 2;
 		g.gridy = 1;
 		g.gridwidth = 1;
-		panel.add(lastNameText, g);
+		panel.add(this.lastNameText, g);
 
 		this.emailText = new JTextField(email, 10);
 		g.weightx = 0.5;
@@ -103,9 +103,20 @@ public class DoctorView extends JFrame{
 		g.gridwidth = 1;
 		panel.add(viewCalendar, g);
 		
-		this.patients = new JComboBox(patientList.toArray());
-		add(patients, BorderLayout.WEST);
-
+		ArrayList<String> tmpArray = new ArrayList<String>();
+		for(int i = 0; i < patientList.size(); i++){
+			tmpArray.add(patientList.get(i).getFirstName() + " " + patientList.get(i).getLastName());
+		}
+		
+		
+		westPanel = new JPanel();
+		westPanel.setBackground(Color.CYAN);
+		this.patients = new JList(tmpArray.toArray());
+		this.patients.setVisibleRowCount(5);
+		this.patients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		westPanel.add(this.patients);
+		add(westPanel, BorderLayout.WEST);
+	
 		greeting = new JLabel("Doctor Home Page", SwingConstants.CENTER);
 		greeting.setHorizontalTextPosition(SwingConstants.CENTER);
 
@@ -113,10 +124,10 @@ public class DoctorView extends JFrame{
 		add(panel, BorderLayout.CENTER);
 	}
 
-	public void registerListeners(PatientController pc){
-		this.updateInfo.addActionListener(pc);
-		this.changePassword.addActionListener(pc);
-		this.addWindowListener(pc);
+	public void registerListeners(DoctorController dc){
+		this.updateInfo.addActionListener(dc);
+		this.changePassword.addActionListener(dc);
+		this.addWindowListener(dc);
 	}
 
 	public String getEmailText(){
