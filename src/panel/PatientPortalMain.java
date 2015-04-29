@@ -1,11 +1,19 @@
 package panel;
 
 import java.awt.Dimension;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 public class PatientPortalMain {
+	
+	private static InputStream startupStream;
+	private static AudioStream startup;
 
 	public static void main(String[] args) {
 		// arraylist of abstract users
@@ -26,6 +34,15 @@ public class PatientPortalMain {
 		LoginController lc = new LoginController(lp, users);
 
 		lp.registerListeners(lc);
+		
+		try {
+			startupStream = new FileInputStream("src/panel/startup.wav");
+			startup = new AudioStream(startupStream);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		AudioPlayer.player.start(startup);
 
 		lp.setSize(800, 600);
 		lp.setMinimumSize(minimumSize);
