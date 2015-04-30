@@ -158,7 +158,36 @@ public class LoginPanel extends JFrame{
 		phoneNumber.setText("");
 		address.setText("");
 	}
-	
+	// returns true only if password has at least eight characters, consists of only letters
+	// and numbers, and contains at least one digit.
+	public boolean isValidPassword(String password){
+		char c;
+		boolean flag1,flag2,flag3;
+		flag1 = flag2 = false;
+		flag3 = true;
+		if(password.length()<8)
+			flag1 = true;
+		for(int i = 0; i<password.length() - 1; i++){
+			c = password.charAt(i);
+			if(!Character.isLetterOrDigit(c))
+				flag2 = true;
+			if(Character.isDigit(c)&&flag3 == true)
+				flag3 = false;
+		}
+		if(flag1 || flag2 || flag3){
+			JOptionPane.showMessageDialog(null, "Password Error:\n"
+					+ "********************\n"
+					+ "Password must:\n"
+					+ "1) Have a length of 8 or more characters long,\n"
+					+ "2) Contain only letters and numbers,\n"
+					+ "3) Contain at least one number.\n"
+					+ "********************\n"
+					+ "Please try again.");
+			return false;
+		} 
+		return true;
+	}
+		
 	public String getComboBoxSelection(){
 		return (String)userType.getSelectedItem();
 	}
