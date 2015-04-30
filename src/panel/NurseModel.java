@@ -13,8 +13,8 @@ public class NurseModel extends UserModel{
 	
 	public NurseModel(String firstName, String lastName, String userName,
 			char[] otherPassword, String email, String address, String phoneNum){
-		this.firstname = firstname;
-		this.lastname = lastname;
+		this.firstname = firstName;
+		this.lastname = lastName;
 		if(otherPassword != null){
 			String tmpPassword = new String(otherPassword);
 			this.password = tmpPassword;
@@ -28,7 +28,7 @@ public class NurseModel extends UserModel{
 	@Override
 	public int getUserType() {
 		// TODO Auto-generated method stub
-		return 1;
+		return 2;
 	}
 
 	@Override

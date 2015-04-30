@@ -67,7 +67,24 @@ public class CreateUser {
 		doctorView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
+	public NurseModel createNurse(){
+		NurseModel nm = new NurseModel(loginPanel.getNewFirstName(), loginPanel.getNewLastName(),
+				loginPanel.getNewUserName(), loginPanel.getNewPassword(), loginPanel.getNewUserEmail(),
+				loginPanel.getNewUserPhoneNum(), loginPanel.getNewUserAddress());
+		return nm;
+	}
 	
+	public void createNurseView(int index, Session session){
+		NurseView nurseView = new NurseView(users.get(index).getUserName(), users
+				.get(index).getFirstName(), users.get(index).getLastName(),
+				users.get(index).getPassword(), users.get(index).getEmail(),
+				users);
+		NurseController nc = new NurseController(nurseView, users.get(index), session);
+		nurseView.registerListeners(nc);
+		nurseView.setVisible(true);
+		nurseView.setSize(600, 350);
+		nurseView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	}
 	
 	
 	public int authenticateNewUser(){

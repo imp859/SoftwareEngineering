@@ -74,7 +74,9 @@ public class LoginController implements ActionListener {
 				}
 			} else if(view.getComboBoxSelection().equals("Nurse")){
 				if(createUser.authenticateNewUser() == 2){
-					//Create nurse
+					if(createUser.authenticateNewUser() == 2){
+						users.add(createUser.createNurse());
+					}
 				}
 			} else if(view.getComboBoxSelection().equals("Staff")){
 				if(createUser.authenticateNewUser() == 3){
@@ -95,6 +97,8 @@ public class LoginController implements ActionListener {
 					 createUser.createPatientView(index, session);
 					} else if(users.get(index).getUserType() == 1){
 						createUser.createDoctorView(index, session);
+					} else if(users.get(index).getUserType() == 2){
+						createUser.createNurseView(index, session);
 					}
 					
 				}			

@@ -110,7 +110,7 @@ public class DoctorView extends JFrame{
 		
 		
 		westPanel = new JPanel();
-		westPanel.setBackground(Color.CYAN);
+		westPanel.setBackground(Color.GREEN);
 		this.patients = new JList(tmpArray.toArray());
 		this.patients.setVisibleRowCount(5);
 		this.patients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
