@@ -90,7 +90,7 @@ public class LoginController implements ActionListener {
 			view.getMainPanel().setVisible(false);
 			view.getNewUserPanel().setVisible(true);
 			view.getLoginPanel().setVisible(false);
-		} else if (action.equals("Submit")) {
+		} else if (action.equals("Submit") && view.isValidPassword(String.valueOf(view.getNewPassword()))) {
 			// creates a new user and returns to home screen
 			view.getMainPanel().setVisible(true);
 			view.getLoginPanel().setVisible(false);
