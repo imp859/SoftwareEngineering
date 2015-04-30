@@ -249,6 +249,10 @@ public class LoginPanel extends JFrame{
 		return this.loginPanel;
 	}
 	
+	public void duplicateUserName(){
+		JOptionPane.showMessageDialog(loginPanel, "UserName already exists in system");
+	}
+	
 	public JPanel getMainPanel(){
 		return this.panel;
 	}

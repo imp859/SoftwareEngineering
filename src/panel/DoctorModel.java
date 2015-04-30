@@ -24,6 +24,10 @@ public class DoctorModel extends UserModel{
 		this.address = address;
 		this.phoneNum = phoneNum;
 	}
+
+	public void testFunction(){
+		
+	}
 	
 	@Override
 	public int getUserType() {
