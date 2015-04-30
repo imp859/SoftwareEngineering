@@ -103,9 +103,9 @@ public class CreateUser {
 		String validateID = new String();
 		validateID = (String)JOptionPane.showInputDialog("Enter Credentials: ");
 		
-		if(validateID.equals("52rys46")){
+		if(validateID.equalsIgnoreCase("52rys46")){
 			return 1; // doctor
-		} else if(validateID.equals("4t37zD8HT")){
+		} else if(validateID.equalsIgnoreCase("4t37zD8HT")){
 			return 2; // nurse
 		} else if(validateID.equals("345")){
 			return 3; // staff
