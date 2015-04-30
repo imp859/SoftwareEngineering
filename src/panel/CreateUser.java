@@ -28,7 +28,7 @@ public class CreateUser {
 		this.users = users;
 	}
 	
-	public PatientModel createPatient(){
+	public PatientModel createPatient(){		
 		PatientModel pm = new PatientModel(loginPanel.getNewFirstName(), loginPanel.getNewLastName(),
 				loginPanel.getNewUserName(), loginPanel.getNewPassword(), loginPanel.getNewUserEmail(),
 				loginPanel.getNewUserPhoneNum(), loginPanel.getNewUserAddress());
@@ -56,10 +56,16 @@ public class CreateUser {
 	
 	public void createDoctorView(int index, Session session){
 		// create new Doctor View
+		ArrayList<UserModel> patientList = new ArrayList<UserModel>();
+		for(int i = 0; i < users.size(); i++){
+			if(users.get(i).getUserType() == 0){
+				patientList.add(users.get(i)); // only add patients to list
+			}
+		}
 		doctorView = new DoctorView(users.get(index).getUserName(), users
 				.get(index).getFirstName(), users.get(index).getLastName(),
 				users.get(index).getPassword(), users.get(index).getEmail(),
-				users);
+				patientList);
 		DoctorController dc = new DoctorController(doctorView, users.get(index), session);
 		doctorView.registerListeners(dc);
 		doctorView.setVisible(true);
@@ -75,10 +81,16 @@ public class CreateUser {
 	}
 	
 	public void createNurseView(int index, Session session){
+		ArrayList<UserModel> patientList = new ArrayList<UserModel>();
+		for(int i = 0; i < users.size(); i++){
+			if(users.get(i).getUserType() == 0){
+				patientList.add(users.get(i)); // only add patients to list
+			}
+		}
 		NurseView nurseView = new NurseView(users.get(index).getUserName(), users
 				.get(index).getFirstName(), users.get(index).getLastName(),
 				users.get(index).getPassword(), users.get(index).getEmail(),
-				users);
+				patientList);
 		NurseController nc = new NurseController(nurseView, users.get(index), session);
 		nurseView.registerListeners(nc);
 		nurseView.setVisible(true);
@@ -90,9 +102,10 @@ public class CreateUser {
 	public int authenticateNewUser(){
 		String validateID = new String();
 		validateID = (String)JOptionPane.showInputDialog("Enter Credentials: ");
-		if(validateID.equals("123")){
+		
+		if(validateID.equals("52rys46")){
 			return 1; // doctor
-		} else if(validateID.equals("234")){
+		} else if(validateID.equals("4t37zD8HT")){
 			return 2; // nurse
 		} else if(validateID.equals("345")){
 			return 3; // staff
