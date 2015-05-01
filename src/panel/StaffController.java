@@ -17,7 +17,9 @@ public class StaffController implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getActionCommand().equals("Check/Send Message")){
+			
+		}
 	}
 
 }

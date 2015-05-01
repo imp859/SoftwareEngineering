@@ -56,13 +56,22 @@ public class StaffView extends JFrame{
 		g.gridwidth = 1;
 		panel.add(this.lastNameText, 10);
 		
-		this.message = new JButton("Send Patient Message");
+		this.message = new JButton("Check/Send Patient Message");
 		g.weightx = 0.5;
 		g.weighty = 10;
 		g.gridx = 0;
 		g.gridy = 2;
 		g.gridwidth = 1;
 		panel.add(this.message, g);
+		
+		this.messageText = new JTextArea();
+		g.weightx = 0.5;
+		g.weighty = 10;
+		g.gridx = 0;
+		g.gridy = 0;
+		g.gridwidth = 1;
+		panel.add(this.message, g);
+		this.messageText.setVisible(false);
 		
 		this.patients = new JComboBox(patientList.toArray());
 		

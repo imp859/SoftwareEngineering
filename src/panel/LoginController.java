@@ -15,6 +15,7 @@ public class LoginController implements ActionListener {
 	private Session session;
 	private PatientModel patientModel;
 	private CreateUser createUser;
+	private Authenticator auth;
 	private ArrayList<UserModel> users;
 	private String patient;
 	private int index;
@@ -25,6 +26,7 @@ public class LoginController implements ActionListener {
 		session = new Session(); //create new session
 		createUser = new CreateUser(otherView, otherUserModel);
 		this.users = otherUserModel;
+		auth = new Authenticator(otherView, otherUserModel);
 	}
 
 	
@@ -54,34 +56,6 @@ public class LoginController implements ActionListener {
 		//throwing exception which generates JOptionPane in view. user was not found
 		throw new Exception();
 	}
-	
-	private int checkUserNameEmailPassword() {
-		char[] tmpEmail;
-		int flag = 0;
-		tmpEmail = view.getNewUserEmail().toCharArray();
-		for(int i = 0; i < tmpEmail.length; i++){
-			if(tmpEmail[i] == '@'){
-				flag = 1;
-			}
-		}
-		if(flag == 0){			
-			JOptionPane.showMessageDialog(view.getLoginPanel(), "Email must contain @ symbol");
-			return 0;
-		}
-		if(view.getNewPassword().length < 8){
-			JOptionPane.showMessageDialog(view.getLoginPanel(), "Password must be 8 characters long");
-			return 0;
-		}
-		for (int i = 0; i < users.size(); i++) {
-			if (view.getNewUserName().equalsIgnoreCase(
-					users.get(i).getUserName())) {
-				view.duplicateUserName();
-				return 0;
-			}
-		}
-		return 1;
-	}
-	
 
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
@@ -90,26 +64,23 @@ public class LoginController implements ActionListener {
 			view.getMainPanel().setVisible(false);
 			view.getNewUserPanel().setVisible(true);
 			view.getLoginPanel().setVisible(false);
-		} else if (action.equals("Submit") && view.isValidPassword(String.valueOf(view.getNewPassword()))) {
-			// creates a new user and returns to home screen
+		} else if (action.equals("Submit") && view.isValidPassword(String.valueOf(view.getNewPassword()))
+				&& auth.checkNewUserFields()) {
 			view.getMainPanel().setVisible(true);
 			view.getLoginPanel().setVisible(false);
 			view.getNewUserPanel().setVisible(false);
 			if(view.getComboBoxSelection().equals("Patient")){
-				if(this.checkUserNameEmailPassword() == 1)
 				 users.add(createUser.createPatient()); // add user to arraylist
 			} else if(view.getComboBoxSelection().equals("Doctor")){
-				if(createUser.authenticateNewUser() == 1){
-				 if(this.checkUserNameEmailPassword() == 1)	
+				if(auth.authenticateNewUser() == 1){
 					users.add(createUser.createDoctor()); // Create doctor
 				}
 			} else if(view.getComboBoxSelection().equals("Nurse")){
-				if(createUser.authenticateNewUser() == 2){
-					if(this.checkUserNameEmailPassword() == 1)	
+				if(auth.authenticateNewUser() == 2){
 					 users.add(createUser.createNurse());					
 				}
 			} else if(view.getComboBoxSelection().equals("Staff")){
-				if(createUser.authenticateNewUser() == 3){
+				if(auth.authenticateNewUser() == 3){
 					//Create staff
 				}
 			}

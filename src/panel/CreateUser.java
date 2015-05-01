@@ -43,7 +43,7 @@ public class CreateUser {
 		pc = new PatientController(patientView, users.get(index), session);
 		patientView.registerListeners(pc);
 		patientView.setVisible(true);
-		patientView.setSize(350, 300);
+		patientView.setSize(450, 300);
 		patientView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
@@ -96,21 +96,6 @@ public class CreateUser {
 		nurseView.setVisible(true);
 		nurseView.setSize(600, 350);
 		nurseView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	}
-	
-	
-	public int authenticateNewUser(){
-		String validateID = new String();
-		validateID = (String)JOptionPane.showInputDialog("Enter Credentials: ");
-		
-		if(validateID.equalsIgnoreCase("52rys46")){
-			return 1; // doctor
-		} else if(validateID.equalsIgnoreCase("4t37zD8HT")){
-			return 2; // nurse
-		} else if(validateID.equals("345")){
-			return 3; // staff
-		}
-		return -1;
 	}
 	
 }
