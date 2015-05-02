@@ -81,7 +81,7 @@ public class LoginController implements ActionListener {
 				}
 			} else if(view.getComboBoxSelection().equals("Staff")){
 				if(auth.authenticateNewUser() == 3){
-					//Create staff
+					users.add(createUser.createStaff());
 				}
 			}
 			view.resetFields(); // set textfields to "" string
@@ -100,6 +100,8 @@ public class LoginController implements ActionListener {
 						createUser.createDoctorView(index, session);
 					} else if(users.get(index).getUserType() == 2){
 						createUser.createNurseView(index, session);
+					} else if(users.get(index).getUserType() == 3){
+						createUser.createStaffView(index, session);
 					}
 					
 				}			

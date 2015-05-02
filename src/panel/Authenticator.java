@@ -64,10 +64,8 @@ public class Authenticator {
 			view.invalidPhoneNumber();
 			return false;
 		}
-		System.out.println("passed length: " + length);
 		// format accepted(1112223333, 111-222-3333, 1-222-333-4444)
 		if (length == 10 || length == 12 || length == 14) {
-			System.out.println("in main if");
 			if (length == 9) {
 				for (int i = 0; i < length; i++) {
 					ch = phoneNum.charAt(i);
@@ -79,16 +77,13 @@ public class Authenticator {
 				return true;
 			}
 			if (length == 12) {
-				System.out.println("11");
 				if (phoneNum.charAt(3) != '-' || phoneNum.charAt(7) != '-') {
-					System.out.println("first");
 					view.invalidPhoneNumber();
 					return false;
 				}
 				for (int i = 0; i < length; i++) {
 					ch = phoneNum.charAt(i);
 					if ((i != 3 && i != 7) && Character.isLetter(ch)) {
-						System.out.println("second");
 						view.invalidPhoneNumber();
 						return false;
 					}
@@ -129,8 +124,7 @@ public class Authenticator {
 	
 	public int authenticateNewUser(){
 		String validateID = new String();
-		validateID = (String)JOptionPane.showInputDialog("Enter Credentials: ");
-		
+		validateID = (String)JOptionPane.showInputDialog("Enter Credentials: ");		
 		if(validateID.equalsIgnoreCase("52rys46")){
 			return 1; // doctor
 		} else if(validateID.equalsIgnoreCase("4t37zD8HT")){

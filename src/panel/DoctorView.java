@@ -108,7 +108,6 @@ public class DoctorView extends JFrame{
 			tmpArray.add(patientList.get(i).getUserName());
 		}
 		
-		
 		westPanel = new JPanel();
 		westPanel.setBackground(Color.GREEN);
 		this.patients = new JList(tmpArray.toArray());

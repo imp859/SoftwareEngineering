@@ -98,4 +98,28 @@ public class CreateUser {
 		nurseView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
+	public StaffModel createStaff(){
+		StaffModel sm = new StaffModel(loginPanel.getNewFirstName(), loginPanel.getNewLastName(),
+				loginPanel.getNewUserName(), loginPanel.getNewPassword(), loginPanel.getNewUserEmail(),
+				loginPanel.getNewUserPhoneNum(), loginPanel.getNewUserAddress());
+		return sm;
+	}
+	
+	public void createStaffView(int index, Session session){
+		ArrayList<UserModel> patientList = new ArrayList<UserModel>();
+		for(int i = 0; i < users.size(); i++){
+			if(users.get(i).getUserType() == 0){
+				patientList.add(users.get(i)); // only add patients to list
+			}
+		}
+		StaffView staffView = new StaffView(users.get(index).getUserName(), users
+				.get(index).getFirstName(), users.get(index).getLastName(),
+				patientList);
+		StaffController sc = new StaffController(staffView, users.get(index), session);
+		staffView.registerListeners(sc);
+		staffView.setVisible(true);
+		staffView.setSize(600, 350);
+		staffView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	}
+	
 }
