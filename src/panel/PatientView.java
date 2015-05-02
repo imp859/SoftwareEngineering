@@ -8,9 +8,12 @@ public class PatientView extends JFrame{
 
 	private JLabel patientFirstName, patientLastName, firstNameText, lastNameText,
 					email, phoneNum, address;
-	private JLabel greeting;
-	private JButton scheduleAppt, updateInfo, changePassword;
+	private JLabel greeting, messageLabel;
+	private JButton scheduleAppt, updateInfo, changePassword, checkMessage,
+		backButton, sendButton;
 	private JTextField emailText, phoneNumText, addressText;
+	private JTextArea messageText;
+	private JScrollPane messageScroll;
 	private JPanel panel;
 	private GridBagConstraints g;
 	
@@ -122,9 +125,54 @@ public class PatientView extends JFrame{
 		g.gridwidth = 1;
 		panel.add(changePassword, g);
 		
+		this.checkMessage = new JButton("Send/Check Message");
+		g.gridx = 4;
+		g.gridy = 5;
+		g.gridwidth = 1;
+		panel.add(checkMessage, g);
+		
+		this.messageLabel = new JLabel("Message: ");
+		g.anchor = GridBagConstraints.PAGE_START;
+		g.weightx = 0.5;
+		g.weighty = 15;
+		g.gridx = 0;
+		g.gridy = 0;
+		g.gridwidth = 1;
+		messageLabel.setVisible(false);
+		panel.add(messageLabel, g);
+		
+		this.messageText = new JTextArea(10, 25);
+		this.messageScroll = new JScrollPane(messageText);
+		g.weightx = 0.5;
+		g.weighty = 0.5;
+		g.gridx = 2;
+		g.gridy = 0;
+		g.gridwidth = 1;
+		messageScroll.setVisible(false);
+		panel.add(messageScroll, g);
+		
+		this.backButton = new JButton("Back");
+		g.weightx = 0.5;
+		g.weighty = 0.5;
+		g.gridx = 0;
+		g.gridy = 2;
+		g.gridwidth = 1;
+		this.backButton.setVisible(false);
+		panel.add(backButton, g);
+		
+		this.sendButton = new JButton("Send Message");
+		g.weightx = 0.5;
+		g.weighty = 0.5;
+		g.gridx = 2;
+		g.gridy = 2;
+		g.gridwidth = 1;
+		this.sendButton.setVisible(false);
+		panel.add(sendButton, g);
+		
 		greeting = new JLabel("Patient HomePage", SwingConstants.CENTER);
 		greeting.setHorizontalTextPosition(SwingConstants.CENTER);
 		scheduleAppt = new JButton("Schedule Appointment");
+		this.scheduleAppt.setVisible(true);
 		
 		add(greeting, BorderLayout.NORTH);
 		add(panel, BorderLayout.CENTER);
@@ -134,7 +182,51 @@ public class PatientView extends JFrame{
 	public void registerListeners(PatientController pc){
 		this.updateInfo.addActionListener(pc);
 		this.changePassword.addActionListener(pc);
+		this.checkMessage.addActionListener(pc);
+		this.backButton.addActionListener(pc);
 		this.addWindowListener(pc);
+	}
+	
+	public void showMessageArea(){
+		this.patientFirstName.setVisible(false);
+		this.firstNameText.setVisible(false);
+		this.patientLastName.setVisible(false);
+		this.lastNameText.setVisible(false);
+		this.email.setVisible(false);
+		this.emailText.setVisible(false);
+		this.address.setVisible(false);
+		this.addressText.setVisible(false);
+		this.phoneNum.setVisible(false);
+		this.phoneNumText.setVisible(false);
+		this.updateInfo.setVisible(false);
+		this.changePassword.setVisible(false);
+		this.messageLabel.setVisible(true);
+		this.messageScroll.setVisible(true);
+		this.scheduleAppt.setVisible(false);
+		this.backButton.setVisible(true);
+		this.sendButton.setVisible(true);
+		this.checkMessage.setVisible(false);
+	}
+	
+	public void showInfoArea(){
+		this.patientFirstName.setVisible(true);
+		this.firstNameText.setVisible(true);
+		this.patientLastName.setVisible(true);
+		this.lastNameText.setVisible(true);
+		this.email.setVisible(true);
+		this.emailText.setVisible(true);
+		this.address.setVisible(true);
+		this.addressText.setVisible(true);
+		this.phoneNum.setVisible(true);
+		this.phoneNumText.setVisible(true);
+		this.updateInfo.setVisible(true);
+		this.changePassword.setVisible(true);
+		this.messageLabel.setVisible(false);
+		this.messageScroll.setVisible(false);
+		this.scheduleAppt.setVisible(true);
+		this.backButton.setVisible(false);
+		this.sendButton.setVisible(false);
+		this.checkMessage.setVisible(true);
 	}
 	
 	public String getEmailText(){
@@ -155,6 +247,10 @@ public class PatientView extends JFrame{
 	
 	public String getLastNameText(){
 		return this.lastNameText.getText();
+	}
+	
+	public String getMessageText(){
+		return this.checkMessage.getText();
 	}
 	
 	

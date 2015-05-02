@@ -17,7 +17,11 @@ public class StaffController implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getActionCommand().equals("Check/Send Patient Message")){
+			view.showMessage();
+		} else if(e.getActionCommand().equals("Back")){
+			view.showStaffInfo();
+		}
 	}
 
 }

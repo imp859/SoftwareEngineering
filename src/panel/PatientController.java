@@ -26,6 +26,11 @@ public class PatientController implements ActionListener, WindowListener{
 			model.setAddress(view.getAddressText());
 		} else if(e.getActionCommand().equals("Change Password")){
 			// TODO
+		} else if(e.getActionCommand().equals("Send/Check Message")){
+			view.showMessageArea();
+			
+		} else if(e.getActionCommand().equals("Back")){
+			view.showInfoArea();
 		}
 		
 	}

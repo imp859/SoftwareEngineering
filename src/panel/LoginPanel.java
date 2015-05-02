@@ -167,7 +167,7 @@ public class LoginPanel extends JFrame{
 		flag3 = true;
 		if(password.length()<8)
 			flag1 = true;
-		for(int i = 0; i<password.length() - 1; i++){
+		for(int i = 0; i < password.length(); i++){
 			c = password.charAt(i);
 			if(!Character.isLetterOrDigit(c))
 				flag2 = true;
@@ -279,7 +279,23 @@ public class LoginPanel extends JFrame{
 	}
 	
 	public void duplicateUserName(){
-		JOptionPane.showMessageDialog(loginPanel, "UserName already exists in system");
+		JOptionPane.showMessageDialog(loginPanel, "1. UserName already exists in system\n"
+				+ "2. There cannot be a space in the user name");
+	}
+	
+	public void invalidEmail(){
+		JOptionPane.showMessageDialog(loginPanel, "Email must:\n"
+				+ "1. Have one @ character\n"
+				+ "2. End with .net, .com, or .org\n"
+				+ "3. Cannot start with @ character");
+	}
+	
+	public void invalidPhoneNumber(){
+		JOptionPane.showMessageDialog(loginPanel, "Phone Number must "
+				+ "have one of the following formats:\n"
+				+ "1. 111222333\n"
+				+ "2. 111-222-333\n"
+				+ "3. 1-222-333-444");
 	}
 	
 	public JPanel getMainPanel(){
