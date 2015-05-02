@@ -10,7 +10,8 @@ package panel;
 public class PatientModel extends UserModel {
 
 	private int appt;
-	private String firstname, lastname, password, userName, email, address, phoneNum;
+	private String firstname, lastname, password, userName, email, address, phoneNum,
+					userMessage;
 
 	// eventually all textfield info from view will be passed into constructor
 	public PatientModel(String firstName, String lastName, String userName,
@@ -97,6 +98,13 @@ public class PatientModel extends UserModel {
 
 	public void addUser(String name, String password) {
 		// TODO Auto-generated method stub
-
+	}
+	
+	public void setMessage(String message){
+		this.userMessage = message;
+	}
+	
+	public String getUserMessage(){
+		return this.userMessage;
 	}
 }

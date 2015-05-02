@@ -19,7 +19,7 @@ public class PatientView extends JFrame{
 	
 	// constructor passes in the patients information
 	public PatientView(String userNameText, String firstName, String lastName, String passWord,
-			String email, String phoneNum, String address){
+			String email, String phoneNum, String address, String message){
 		super("Welcome " + userNameText + "!");
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BorderLayout());
@@ -141,7 +141,7 @@ public class PatientView extends JFrame{
 		messageLabel.setVisible(false);
 		panel.add(messageLabel, g);
 		
-		this.messageText = new JTextArea(10, 25);
+		this.messageText = new JTextArea(message, 10, 25);
 		this.messageScroll = new JScrollPane(messageText);
 		g.weightx = 0.5;
 		g.weighty = 0.5;
