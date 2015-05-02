@@ -102,4 +102,16 @@ public class DoctorModel extends UserModel{
 
 	}
 
+	@Override
+	public void setMessage(String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getUserMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

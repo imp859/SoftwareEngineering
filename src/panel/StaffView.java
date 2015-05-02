@@ -14,6 +14,7 @@ public class StaffView extends JFrame{
 	private JList patients;
 	private JScrollPane scrollPane;
 	private JPanel panel, westPanel;
+	private ArrayList<String> tmpArray;
 	private GridBagConstraints g;	
 	
 	public StaffView(String username, String firstName, String lastName, ArrayList<UserModel> patientList){
@@ -104,7 +105,7 @@ public class StaffView extends JFrame{
 		sendButton.setVisible(false);
 		panel.add(sendButton, g);
 		
-		ArrayList<String> tmpArray = new ArrayList<String>();
+		tmpArray = new ArrayList<String>();
 		for(int i = 0; i < patientList.size(); i++){
 			tmpArray.add(patientList.get(i).getUserName());
 		}	
@@ -125,6 +126,7 @@ public class StaffView extends JFrame{
 		this.message.addActionListener(sc);
 		this.back.addActionListener(sc);
 		this.sendButton.addActionListener(sc);
+		this.addWindowListener(sc);
 		//this.patients.addActionListener(sc);
 	}
 	
@@ -150,6 +152,25 @@ public class StaffView extends JFrame{
 		this.scrollPane.setVisible(false);
 		this.back.setVisible(false);
 		this.sendButton.setVisible(false);
+	}
+	
+	public ArrayList getPatientsList(){
+		return tmpArray;
+	}
+	
+	public String getPatientUserName(){
+		return (String)this.patients.getSelectedValue();
+	}
+	
+	public String getMessage() {
+		if(this.messageText.getText().length() < 255){
+			return this.messageText.getText();
+		}
+		return null;
+	}
+	
+	public void invalidMessage(){
+		JOptionPane.showMessageDialog(this, "Message must be shorter than 256 characters");
 	}
 	
 }

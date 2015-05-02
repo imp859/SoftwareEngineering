@@ -28,4 +28,6 @@ public abstract class UserModel {
 	public abstract String getEmail();
 	public abstract String getPhoneNum();
 	public abstract String getAddress();
+	public abstract void setMessage(String message);
+	public abstract String getUserMessage();
 }
