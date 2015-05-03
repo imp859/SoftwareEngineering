@@ -40,7 +40,7 @@ public class CreateUser {
 				.get(index).getFirstName(), users.get(index).getLastName(),
 				users.get(index).getPassword(), users.get(index).getEmail(),
 				users.get(index).getPhoneNum(), users.get(index).getAddress(), users.get(index).getUserMessage());
-		pc = new PatientController(patientView, users.get(index), session);
+		pc = new PatientController(patientView, users.get(index), session, users);
 		patientView.registerListeners(pc);
 		patientView.setVisible(true);
 		patientView.setSize(450, 300);
@@ -114,7 +114,7 @@ public class CreateUser {
 		}
 		StaffView staffView = new StaffView(users.get(index).getUserName(), users
 				.get(index).getFirstName(), users.get(index).getLastName(),
-				patientList);
+				patientList, users.get(index).getUserMessage(), users.get(index).getPatientName());
 		StaffController sc = new StaffController(staffView, users.get(index), session, users);
 		staffView.registerListeners(sc);
 		staffView.setVisible(true);

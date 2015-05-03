@@ -16,11 +16,13 @@ public class PatientView extends JFrame{
 	private JScrollPane messageScroll;
 	private JPanel panel;
 	private GridBagConstraints g;
+	private String userName;
 	
 	// constructor passes in the patients information
 	public PatientView(String userNameText, String firstName, String lastName, String passWord,
 			String email, String phoneNum, String address, String message){
 		super("Welcome " + userNameText + "!");
+		this.userName = userNameText;
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BorderLayout());
 		
@@ -184,6 +186,7 @@ public class PatientView extends JFrame{
 		this.changePassword.addActionListener(pc);
 		this.checkMessage.addActionListener(pc);
 		this.backButton.addActionListener(pc);
+		this.sendButton.addActionListener(pc);
 		this.addWindowListener(pc);
 	}
 	
@@ -249,9 +252,14 @@ public class PatientView extends JFrame{
 		return this.lastNameText.getText();
 	}
 	
-	public String getMessageText(){
-		return this.checkMessage.getText();
+	public String getUserName(){
+		return this.userName;
 	}
 	
+	public String getMessageText(){
+		if(this.messageText.getText().length() < 255)
+			return this.messageText.getText();
+		return null;
+	}
 	
 }

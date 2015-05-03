@@ -11,7 +11,7 @@ public class StaffModel extends UserModel {
 
 	private int appt;
 	private String firstname, lastname, password, userName, email, address, phoneNum,
-					userMessage;
+					userMessage, patient;
 
 	// eventually all textfield info from view will be passed into constructor
 	public StaffModel(String firstName, String lastName, String userName,
@@ -106,5 +106,14 @@ public class StaffModel extends UserModel {
 	
 	public String getUserMessage(){
 		return this.userMessage;
+	}
+
+	@Override
+	public void fromUser(String user) {
+		this.patient = user;
+	}
+	
+	public String getPatientName(){
+		return this.patient;
 	}
 }

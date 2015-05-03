@@ -107,4 +107,16 @@ public class PatientModel extends UserModel {
 	public String getUserMessage(){
 		return this.userMessage;
 	}
+
+	@Override
+	public void fromUser(String user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getPatientName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

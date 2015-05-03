@@ -8,6 +8,7 @@ import javax.swing.*;
 public class StaffView extends JFrame{
 	
 	private JTextArea messageText;
+	private JLabel fromPatient;
 	private JLabel userLabel, firstName, lastName, greeting;
 	private JLabel firstNameText, lastNameText, messageLabel;
 	private JButton message, back, sendButton;
@@ -17,7 +18,8 @@ public class StaffView extends JFrame{
 	private ArrayList<String> tmpArray;
 	private GridBagConstraints g;	
 	
-	public StaffView(String username, String firstName, String lastName, ArrayList<UserModel> patientList){
+	public StaffView(String username, String firstName, String lastName, ArrayList<UserModel> patientList,
+					String userMessage, String patientName){
 		super("Welcome " + username + "!");
 		this.setBackground(Color.WHITE);
 		greeting = new JLabel("Staff HomePage", SwingConstants.CENTER);
@@ -77,7 +79,7 @@ public class StaffView extends JFrame{
 		this.messageLabel.setVisible(false);
 		panel.add(messageLabel, g);
 		
-		this.messageText = new JTextArea(10, 20);
+		this.messageText = new JTextArea(userMessage, 10, 20);
 		this.scrollPane = new JScrollPane(messageText);
 		g.weightx = 0.5;
 		g.weighty = 10;
@@ -86,6 +88,26 @@ public class StaffView extends JFrame{
 		g.gridwidth = 1;
 		panel.add(this.scrollPane, g);
 		this.scrollPane.setVisible(false);
+		
+		if (patientName == null) {
+			this.fromPatient = new JLabel("No Message");
+			g.weightx = 0.5;
+			g.weighty = 0.5;
+			g.gridx = 4;
+			g.gridy = 0;
+			g.gridwidth = 1;
+			this.fromPatient.setVisible(false);
+			panel.add(this.fromPatient, g);
+		} else{
+			this.fromPatient = new JLabel(patientName);
+			g.weightx = 0.5;
+			g.weighty = 0.5;
+			g.gridx = 4;
+			g.gridy = 0;
+			g.gridwidth = 1;
+			this.fromPatient.setVisible(false);
+			panel.add(this.fromPatient, g);
+		}
 		
 		this.back = new JButton("Back");
 		g.weightx = 0.5;
@@ -140,6 +162,7 @@ public class StaffView extends JFrame{
 		this.scrollPane.setVisible(true);
 		this.back.setVisible(true);
 		this.sendButton.setVisible(true);
+		this.fromPatient.setVisible(true);
 	}
 	
 	public void showStaffInfo(){
@@ -152,6 +175,7 @@ public class StaffView extends JFrame{
 		this.scrollPane.setVisible(false);
 		this.back.setVisible(false);
 		this.sendButton.setVisible(false);
+		this.fromPatient.setVisible(false);
 	}
 	
 	public ArrayList getPatientsList(){
@@ -171,6 +195,10 @@ public class StaffView extends JFrame{
 	
 	public void invalidMessage(){
 		JOptionPane.showMessageDialog(this, "Message must be shorter than 256 characters");
+	}
+	
+	public void fromPatientMessage(String patient){
+		this.fromPatient.setText(patient);
 	}
 	
 }

@@ -30,4 +30,6 @@ public abstract class UserModel {
 	public abstract String getAddress();
 	public abstract void setMessage(String message);
 	public abstract String getUserMessage();
+	public abstract void fromUser(String user);
+	public abstract String getPatientName();
 }

@@ -110,4 +110,16 @@ public class NurseModel extends UserModel{
 		return null;
 	}
 
+	@Override
+	public void fromUser(String user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getPatientName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

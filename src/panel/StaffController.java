@@ -28,17 +28,19 @@ public class StaffController implements ActionListener, WindowListener{
 			view.showStaffInfo();
 		} else if (e.getActionCommand().equals("Send Message")) {
 			String userName = view.getPatientUserName();
-			int index = -1;
-			for (int i = 0; i < patients.size(); i++) {
-				if (userName.equals(patients.get(i).getUserName())) {
-					index = i;
-					break;
+			if (userName != null) {
+				int index = -1;
+				for (int i = 0; i < patients.size(); i++) {
+					if (userName.equals(patients.get(i).getUserName())) {
+						index = i;
+						break;
+					}
 				}
-			}
-			if (index != -1) {
-				patients.get(index).setMessage(view.getMessage());
-			} else {
-				view.invalidMessage();
+				if (index != -1) {
+					patients.get(index).setMessage(view.getMessage());
+				} else {
+					view.invalidMessage();
+				}
 			}
 		}
 	}
