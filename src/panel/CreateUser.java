@@ -4,7 +4,8 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+
+import com.toedter.calendar.JCalendar;
 
 /***
  * called from logincontroller. used to
@@ -15,17 +16,20 @@ import javax.swing.JOptionPane;
 
 public class CreateUser {
 
-	public PatientModel patientModel;
-	public PatientController pc;
-	public DoctorModel doctorModel;
-	public PatientView patientView;
+	private PatientModel patientModel;
+	private PatientController pc;
+	private DoctorModel doctorModel;
+	private PatientView patientView;
 	private DoctorView doctorView;
-	public LoginPanel loginPanel;
-	public ArrayList<UserModel> users;
+	private LoginPanel loginPanel;
+	private ArrayList<UserModel> users;
+	private JCalendar calendar;
 	
 	public CreateUser(LoginPanel lp, ArrayList<UserModel> users){
 		loginPanel = lp;
 		this.users = users;
+		calendar = new JCalendar();
+	
 	}
 	
 	public PatientModel createPatient(){		
@@ -62,15 +66,27 @@ public class CreateUser {
 				patientList.add(users.get(i)); // only add patients to list
 			}
 		}
+		ChooseDoctorView chooseDoctorView = new ChooseDoctorView(users.get(index).getUserName(), users
+				.get(index).getFirstName(), users.get(index).getLastName(),
+				users.get(index).getPassword(), users.get(index).getEmail(),
+				patientList, calendar);
+		DoctorController dc = new DoctorController(chooseDoctorView.getDoctorView(),
+				users.get(index), session, chooseDoctorView);
+		CalendarController cc = new CalendarController(chooseDoctorView.getCalendarView());
+		chooseDoctorView.registerViewListeners(dc, cc);
+		chooseDoctorView.setSize(600, 350);
+		chooseDoctorView.setVisible(true);
+		chooseDoctorView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		/*
 		doctorView = new DoctorView(users.get(index).getUserName(), users
 				.get(index).getFirstName(), users.get(index).getLastName(),
 				users.get(index).getPassword(), users.get(index).getEmail(),
 				patientList);
-		DoctorController dc = new DoctorController(doctorView, users.get(index), session);
+		DoctorController dc = new DoctorController(doctorView, users.get(index), session, calendar);
 		doctorView.registerListeners(dc);
 		doctorView.setVisible(true);
 		doctorView.setSize(600, 350);
-		doctorView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		doctorView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);*/
 	}
 	
 	public NurseModel createNurse(){
