@@ -5,17 +5,23 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.JFrame;
+
+import com.toedter.calendar.JCalendar;
+
 public class DoctorController implements ActionListener, WindowListener{
 
 	private DoctorView view;
 	private UserModel model;
 	private Session session;
+	private ChooseDoctorView mainDoctorSessionView;
 	
 	// passed patientview and user model
-	public DoctorController(DoctorView view, UserModel userModel, Session session){
+	public DoctorController(DoctorView view, UserModel userModel, Session session, ChooseDoctorView otherView){
 		this.view = view;
 		this.model = userModel;
 		this.session = session;
+		this.mainDoctorSessionView = otherView;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -24,6 +30,7 @@ public class DoctorController implements ActionListener, WindowListener{
 			model.setEmail(view.getEmailText());
 		} else if(e.getActionCommand().equals("Change Password")){
 			// TODO
+		} else if(e.getActionCommand().equals("View Calendar")){
 		}
 		
 	}

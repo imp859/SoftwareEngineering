@@ -6,11 +6,14 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
+
 import javax.swing.*;
 
-public class DoctorView extends JFrame{
+
+public class DoctorView{
 	
 	private JButton checkCalendar;
+	private JPanel mainPanel;
 	
 	private JLabel doctorFirstName, doctorLastName, firstNameText, lastNameText,
 	email, phoneNum, address;
@@ -18,16 +21,16 @@ public class DoctorView extends JFrame{
 	private JButton updateInfo, changePassword, viewCalendar;
 	private JTextField emailText;
 	private JList patients;
-	private JPanel panel, westPanel;
+	private JPanel panel, westPanel, dateView;
 	private GridBagConstraints g;
-
+	
 	// constructor passes in the patients information
-	public DoctorView(String userNameText, String firstName, String lastName, String passWord,
-			String email, ArrayList<UserModel> patientList){
-		super("Welcome " + userNameText + "!");
-		this.setBackground(Color.WHITE);
-		this.setLayout(new BorderLayout());
-
+	public DoctorView(String userNameText, String firstName, String lastName,
+			String passWord, String email, ArrayList<UserModel> patientList) {
+		
+		mainPanel = new JPanel(new BorderLayout());
+		mainPanel.setBackground(Color.WHITE);
+		
 		panel = new JPanel(new GridBagLayout());
 		g = new GridBagConstraints();
 		panel.setBackground(Color.WHITE);
@@ -114,19 +117,23 @@ public class DoctorView extends JFrame{
 		this.patients.setVisibleRowCount(5);
 		this.patients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		westPanel.add(this.patients);
-		add(westPanel, BorderLayout.WEST);
+		mainPanel.add(westPanel, BorderLayout.WEST);
 	
 		greeting = new JLabel("Doctor Home Page", SwingConstants.CENTER);
 		greeting.setHorizontalTextPosition(SwingConstants.CENTER);
-
-		add(greeting, BorderLayout.NORTH);
-		add(panel, BorderLayout.CENTER);
+		
+		mainPanel.add(greeting, BorderLayout.NORTH);
+		mainPanel.add(panel, BorderLayout.CENTER);
 	}
 
 	public void registerListeners(DoctorController dc){
 		this.updateInfo.addActionListener(dc);
 		this.changePassword.addActionListener(dc);
-		this.addWindowListener(dc);
+		this.viewCalendar.addActionListener(dc);
+	}
+	
+	public JPanel getPanel(){
+		return this.mainPanel;
 	}
 
 	public String getEmailText(){
@@ -140,4 +147,5 @@ public class DoctorView extends JFrame{
 	public String getLastNameText(){
 		return this.lastNameText.getText();
 	}
+	
 }
