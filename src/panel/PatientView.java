@@ -4,6 +4,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import com.toedter.calendar.JDateChooser;
+
 public class PatientView extends JFrame{
 
 	private JLabel patientFirstName, patientLastName, firstNameText, lastNameText,
@@ -14,13 +16,15 @@ public class PatientView extends JFrame{
 	private JTextField emailText, phoneNumText, addressText;
 	private JTextArea messageText;
 	private JScrollPane messageScroll;
-	private JPanel panel;
+	private JPanel panel, southPanel;
 	private GridBagConstraints g;
 	private String userName;
+	private JDateChooser dateChooser;
 	
 	// constructor passes in the patients information
 	public PatientView(String userNameText, String firstName, String lastName, String passWord,
-			String email, String phoneNum, String address, String message){
+			String email, String phoneNum, String address, String message,
+			JDateChooser dateChooser){
 		super("Welcome " + userNameText + "!");
 		this.userName = userNameText;
 		this.setBackground(Color.WHITE);
@@ -173,12 +177,16 @@ public class PatientView extends JFrame{
 		
 		greeting = new JLabel("Patient HomePage", SwingConstants.CENTER);
 		greeting.setHorizontalTextPosition(SwingConstants.CENTER);
+		southPanel = new JPanel();
 		scheduleAppt = new JButton("Schedule Appointment");
 		this.scheduleAppt.setVisible(true);
-		
+		southPanel.add(scheduleAppt);
+		this.dateChooser = dateChooser;
+		southPanel.add(dateChooser);
+		southPanel.setBackground(Color.GREEN);
 		add(greeting, BorderLayout.NORTH);
 		add(panel, BorderLayout.CENTER);
-		add(scheduleAppt, BorderLayout.SOUTH);
+		add(southPanel, BorderLayout.SOUTH);
 	}
 	
 	public void registerListeners(PatientController pc){
@@ -187,7 +195,12 @@ public class PatientView extends JFrame{
 		this.checkMessage.addActionListener(pc);
 		this.backButton.addActionListener(pc);
 		this.sendButton.addActionListener(pc);
+		this.scheduleAppt.addActionListener(pc);
 		this.addWindowListener(pc);
+	}
+	
+	public String getDate(){
+		return this.dateChooser.getDateFormatString();
 	}
 	
 	public void showMessageArea(){

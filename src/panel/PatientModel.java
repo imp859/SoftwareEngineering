@@ -9,7 +9,7 @@ package panel;
 
 public class PatientModel extends UserModel {
 
-	private int appt;
+	private String appt;
 	private String firstname, lastname, password, userName, email, address, phoneNum,
 					userMessage;
 
@@ -27,11 +27,6 @@ public class PatientModel extends UserModel {
 		this.email = email;
 		this.address = address;
 		this.phoneNum = phoneNum;
-	}
-
-	// call this when clicking schedule appointment
-	public void setAppt() {
-		appt = 1;
 	}
 
 	public void setPassword(String otherPassword) {
@@ -59,7 +54,7 @@ public class PatientModel extends UserModel {
 	}
 
 	// for the staff and doctor(maybe?) view
-	public int getAppt() {
+	public String getAppt() {
 		return appt;
 	}
 
@@ -118,5 +113,11 @@ public class PatientModel extends UserModel {
 	public String getPatientName() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setAppt(String date) {
+		appt = date;
+		System.out.println(appt);
 	}
 }

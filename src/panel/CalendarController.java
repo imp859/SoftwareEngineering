@@ -12,8 +12,10 @@ public class CalendarController implements PropertyChangeListener {
 	}
 
 	public void propertyChange(PropertyChangeEvent evt) {
+		String date = view.getJCalendar().getDate().toString();
+		System.out.println(date);
 		if (evt.getNewValue() != null) {
-			
+			//System.out.println(view.getJCalendar().getDate());
 		}
 	}
 }
