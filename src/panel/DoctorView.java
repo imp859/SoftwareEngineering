@@ -108,7 +108,8 @@ public class DoctorView{
 		
 		ArrayList<String> tmpArray = new ArrayList<String>();
 		for(int i = 0; i < patientList.size(); i++){
-			tmpArray.add(patientList.get(i).getUserName());
+			tmpArray.add((patientList.get(i).getFirstName().concat
+					(" ".concat(patientList.get(i).getLastName()))));
 		}
 		
 		westPanel = new JPanel();
