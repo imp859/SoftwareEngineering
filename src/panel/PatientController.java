@@ -10,14 +10,14 @@ public class PatientController implements ActionListener, WindowListener{
 
 	private PatientView view;
 	private UserModel model;
-	private ArrayList<UserModel> staff;
+	private ArrayList<UserModel> users;
 	private Session session;
 	
 	// passed patientview and user model
 	public PatientController(PatientView view, UserModel userModel, Session session, ArrayList<UserModel> users){
 		this.view = view;
 		this.model = userModel;
-		this.staff = users;
+		this.users = users;
 		this.session = session;
 	}
 
@@ -34,11 +34,23 @@ public class PatientController implements ActionListener, WindowListener{
 		} else if(e.getActionCommand().equals("Back")){
 			view.showInfoArea();
 		} else if(e.getActionCommand().equals("Send Message")){
-			for(int i = 0; i < staff.size(); i++){
-				if(staff.get(i).getUserType() == 3){
-					staff.get(i).setMessage(view.getMessageText());
-					staff.get(i).fromUser(view.getUserName());
+			for(int i = 0; i < users.size(); i++){
+				if(users.get(i).getUserType() == 3){
+					users.get(i).setMessage(view.getMessageText());
+					users.get(i).fromUser(view.getUserName());
 				}
+			}
+		} else if(e.getActionCommand().equals("Schedule Appointment")){
+			String userName = view.getUserName();
+			int index = -1;
+			for(int i = 0; i < users.size(); i++){
+				if(userName.equals(users.get(i).getUserName())){
+					index = i;
+					break;
+				}
+			}
+			if(index != -1){
+				users.get(index).setAppt(view.getDate());
 			}
 		}
 		

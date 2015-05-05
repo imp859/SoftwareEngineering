@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 
 /***
  * called from logincontroller. used to
@@ -24,11 +25,13 @@ public class CreateUser {
 	private LoginPanel loginPanel;
 	private ArrayList<UserModel> users;
 	private JCalendar calendar;
+	private JDateChooser dateChooser;
 	
 	public CreateUser(LoginPanel lp, ArrayList<UserModel> users){
 		loginPanel = lp;
 		this.users = users;
 		calendar = new JCalendar();
+		dateChooser = new JDateChooser();
 	
 	}
 	
@@ -43,11 +46,12 @@ public class CreateUser {
 		patientView = new PatientView(users.get(index).getUserName(), users
 				.get(index).getFirstName(), users.get(index).getLastName(),
 				users.get(index).getPassword(), users.get(index).getEmail(),
-				users.get(index).getPhoneNum(), users.get(index).getAddress(), users.get(index).getUserMessage());
+				users.get(index).getPhoneNum(), users.get(index).getAddress(), users.get(index).getUserMessage(),
+				dateChooser);
 		pc = new PatientController(patientView, users.get(index), session, users);
 		patientView.registerListeners(pc);
 		patientView.setVisible(true);
-		patientView.setSize(450, 300);
+		patientView.setSize(500, 300);
 		patientView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
@@ -77,16 +81,6 @@ public class CreateUser {
 		chooseDoctorView.setSize(600, 350);
 		chooseDoctorView.setVisible(true);
 		chooseDoctorView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		/*
-		doctorView = new DoctorView(users.get(index).getUserName(), users
-				.get(index).getFirstName(), users.get(index).getLastName(),
-				users.get(index).getPassword(), users.get(index).getEmail(),
-				patientList);
-		DoctorController dc = new DoctorController(doctorView, users.get(index), session, calendar);
-		doctorView.registerListeners(dc);
-		doctorView.setVisible(true);
-		doctorView.setSize(600, 350);
-		doctorView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);*/
 	}
 	
 	public NurseModel createNurse(){

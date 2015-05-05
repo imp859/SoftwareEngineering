@@ -24,7 +24,8 @@ public abstract class UserModel {
 	public abstract String getLastName();
 	public abstract String getPassword();
 	public abstract String getUserName();
-	public abstract void setAppt();
+	public abstract void setAppt(String date);
+	public abstract String getAppt();
 	public abstract String getEmail();
 	public abstract String getPhoneNum();
 	public abstract String getAddress();

@@ -8,7 +8,7 @@ package panel;
 
 public class DoctorModel extends UserModel{
 
-	private int appt;
+	private String appt;
 	private String firstname, lastname, password, userName, email, address, phoneNum;
 	
 	public DoctorModel(String firstName, String lastName, String userName,
@@ -33,11 +33,6 @@ public class DoctorModel extends UserModel{
 	public int getUserType() {
 		// TODO Auto-generated method stub
 		return 1;
-	}
-
-	@Override
-	public void setAppt() {
-		appt = 1;
 	}
 
 	public void setPassword(String otherPassword) {
@@ -65,7 +60,7 @@ public class DoctorModel extends UserModel{
 	}
 
 	// for the staff and doctor(maybe?) view
-	public int getAppt() {
+	public String getAppt() {
 		return appt;
 	}
 
@@ -124,6 +119,12 @@ public class DoctorModel extends UserModel{
 	public String getPatientName() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setAppt(String date) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
