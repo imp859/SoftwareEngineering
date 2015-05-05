@@ -200,7 +200,7 @@ public class PatientView extends JFrame{
 	}
 	
 	public String getDate(){
-		return this.dateChooser.getDateFormatString();
+		return this.dateChooser.getDate().toString();
 	}
 	
 	public void showMessageArea(){
@@ -222,6 +222,7 @@ public class PatientView extends JFrame{
 		this.backButton.setVisible(true);
 		this.sendButton.setVisible(true);
 		this.checkMessage.setVisible(false);
+		this.southPanel.setVisible(false);
 	}
 	
 	public void showInfoArea(){
@@ -243,6 +244,7 @@ public class PatientView extends JFrame{
 		this.backButton.setVisible(false);
 		this.sendButton.setVisible(false);
 		this.checkMessage.setVisible(true);
+		this.southPanel.setVisible(true);
 	}
 	
 	public String getEmailText(){

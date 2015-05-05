@@ -99,12 +99,7 @@ public class DoctorView{
 		g.gridy = 5;
 		g.gridwidth = 1;
 		panel.add(changePassword, g);
-		
-		this.viewCalendar = new JButton("View Calendar");
-		g.gridx = 3;
-		g.gridy = 5;
-		g.gridwidth = 1;
-		panel.add(viewCalendar, g);
+
 		
 		ArrayList<String> tmpArray = new ArrayList<String>();
 		for(int i = 0; i < patientList.size(); i++){
@@ -129,7 +124,6 @@ public class DoctorView{
 	public void registerListeners(DoctorController dc){
 		this.updateInfo.addActionListener(dc);
 		this.changePassword.addActionListener(dc);
-		this.viewCalendar.addActionListener(dc);
 	}
 	
 	public JPanel getPanel(){

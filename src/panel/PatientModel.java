@@ -117,7 +117,8 @@ public class PatientModel extends UserModel {
 
 	@Override
 	public void setAppt(String date) {
-		appt = date;
-		System.out.println(appt);
+		String tmp1 = date.substring(0, 10);
+		String tmp2 = date.substring(24, 28);
+		appt = tmp1 + " " + tmp2;
 	}
 }

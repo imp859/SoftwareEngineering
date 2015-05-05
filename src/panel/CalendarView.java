@@ -1,6 +1,7 @@
 package panel;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -10,20 +11,27 @@ public class CalendarView{
 
 	private JPanel mainPanel;
 	private JCalendar calendar;
-	private JPanel panel;
-	private JLabel patient;
+	private JPanel panel, southPanel;
+	private JLabel patientLabel, patient;
+	private ArrayList<UserModel> patientList;
 	
-	public CalendarView(JCalendar calendar){
+	public CalendarView(JCalendar calendar, ArrayList<UserModel> patientList){
 		mainPanel = new JPanel(new BorderLayout());
 		panel = new JPanel(new BorderLayout());
 		panel.setBackground(Color.WHITE);
 		this.calendar = calendar;
 		panel.add(this.calendar, BorderLayout.CENTER);
 		
-		this.patient = new JLabel("Patient Scheduled: ");
-		panel.add(this.patient, BorderLayout.SOUTH);
+		
+		southPanel = new JPanel();
+		southPanel.setBackground(Color.WHITE);
+		this.patientLabel = new JLabel("Patient Scheduled: ");
+		southPanel.add(this.patientLabel);
+		this.patient = new JLabel("");
+		southPanel.add(this.patient);
 		
 		mainPanel.add(panel);
+		mainPanel.add(southPanel, BorderLayout.SOUTH);
 	}
 	
 	public JPanel getPanel(){
@@ -36,5 +44,9 @@ public class CalendarView{
 	
 	public JCalendar getJCalendar(){
 		return this.calendar;
+	}
+	
+	public void setIsPatientScheduled(String user){
+		this.patient.setText(user);
 	}
 }

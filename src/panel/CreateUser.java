@@ -76,7 +76,7 @@ public class CreateUser {
 				patientList, calendar);
 		DoctorController dc = new DoctorController(chooseDoctorView.getDoctorView(),
 				users.get(index), session, chooseDoctorView);
-		CalendarController cc = new CalendarController(chooseDoctorView.getCalendarView());
+		CalendarController cc = new CalendarController(chooseDoctorView.getCalendarView(), users);
 		chooseDoctorView.registerViewListeners(dc, cc);
 		chooseDoctorView.setSize(600, 350);
 		chooseDoctorView.setVisible(true);

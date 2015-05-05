@@ -20,7 +20,7 @@ public class ChooseDoctorView extends JFrame{
 		
 		doctorView = new DoctorView(userNameText, firstName, lastName,
 				passWord, email, patientList);
-		calendarView = new CalendarView(calendar);
+		calendarView = new CalendarView(calendar, patientList);
 		
 		tabPane.addTab("Doctor Tab", doctorView.getPanel());
 		tabPane.addTab("View Schedule", calendarView.getPanel());
