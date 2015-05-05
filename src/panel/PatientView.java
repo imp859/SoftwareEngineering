@@ -195,6 +195,7 @@ public class PatientView extends JFrame{
 		this.checkMessage.addActionListener(pc);
 		this.backButton.addActionListener(pc);
 		this.sendButton.addActionListener(pc);
+		this.scheduleAppt.addActionListener(pc);
 		this.addWindowListener(pc);
 	}
 	

@@ -117,7 +117,7 @@ public class PatientModel extends UserModel {
 
 	@Override
 	public void setAppt(String date) {
-		// TODO Auto-generated method stub
-		
+		appt = date;
+		System.out.println(appt);
 	}
 }
