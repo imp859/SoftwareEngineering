@@ -18,14 +18,16 @@ import sun.audio.*;
 
 public class LoginPanel extends JFrame{
 	
+	private int smallTxt = 26;
+	
 	//private PatientView patientView;
-	private GridLayout loginLayout = new GridLayout(6, 0, 0, 5); //initial home screen layout
-	private GridLayout infoLayout = new GridLayout(9, 2, 0, 1); // new user layout
-	private GridLayout patientLayout = new GridLayout(2, 0, 0, 1);
-	private ImageIcon logo = new ImageIcon("src/panel/pppicture.png");
-	private JPanel panel = new JPanel(); // initial home screen panel
-	private JPanel logoPanel = new JPanel();
-	private JPanel newUserPanel = new JPanel();
+	private GridLayout loginLayout;
+	private GridLayout infoLayout;
+	private GridLayout patientLayout;
+	private ImageIcon logo;
+	private JPanel panel;
+	private JPanel logoPanel;
+	private JPanel newUserPanel;
 	
 	private JPanel loginPanel;
 	private JButton signIn;
@@ -34,34 +36,36 @@ public class LoginPanel extends JFrame{
 	private JLabel existingPasswordEnter;
 	private JPasswordField existingPassword;
 	
-	private JPanel patientPanel = new JPanel();
-	private JLabel patientTitle; // = new JLabel("Welcome Patient!", SwingConstants.CENTER);
-	private JButton scheduleAppt = new JButton("Schedule Appointment");
+	private JPanel patientPanel;
+	private JLabel patientTitle;
+	private JButton scheduleAppt;
 	
-	private JButton logoButton = new JButton();
-	private JButton newUser = new JButton("New User");
-	private JButton login = new JButton("Login");
-	private JButton submit = new JButton("Submit");
-	private JLabel title = new JLabel("Welcome to the Patient Portal System!", SwingConstants.CENTER);
-	private JLabel descriptionOne = new JLabel("If you are new to the system, please click \"NewUser\" to create an account", SwingConstants.CENTER);
-	private JLabel descriptionTwo = new JLabel("Otherwise, please click \"Login\"", SwingConstants.CENTER);
-	private JLabel nameOne = new JLabel("First Name:");
-	private JLabel nameTwo = new JLabel("Last Name:");
-	private JLabel emailEnter = new JLabel("Email:");
-	private JLabel typeEnter = new JLabel("User Type:");
-	private JLabel usernameEnter = new JLabel("Username:");
-	private JLabel passwordEnter = new JLabel("Password:");
-	private JLabel phoneNumberEnter = new JLabel("Phone Number:");
-	private JLabel addressEnter = new JLabel("Address:");
-	private JTextField firstName = new JTextField(20);
-	private JTextField lastName = new JTextField(20);
-	private JTextField email = new JTextField(20);
-	private JTextField userName = new JTextField(20);
-	private JTextField phoneNumber = new JTextField(20);
-	private JTextField address = new JTextField(20);
-	private JPasswordField password = new JPasswordField(20);
-	private String[] types = {"Patient", "Doctor", "Nurse", "Staff"};
-	private JComboBox userType = new JComboBox(types);
+	private JButton logoButton;
+	private JButton newUser;
+	private JButton login;
+	private JButton submit;
+	private JLabel title;
+	private JLabel descriptionOne;
+	private JLabel descriptionTwo;
+	private JLabel nameOne;
+	private JLabel nameTwo;
+	private JLabel emailEnter;
+	private JLabel typeEnter;
+	private JLabel usernameEnter;
+	private JLabel passwordEnter;
+	private JLabel phoneNumberEnter;
+	private JLabel addressEnter;
+	private JLabel DOB;
+	private JTextField firstName;
+	private JTextField lastName;
+	private JTextField email;
+	private JTextField userName;
+	private JTextField phoneNumber;
+	private JTextField address;
+	private JTextField birthday;
+	private JPasswordField password;
+	private String[] types;
+	private JComboBox userType;
 	
 	private InputStream chimeStream;
 	private AudioStream chime;
@@ -72,7 +76,45 @@ public class LoginPanel extends JFrame{
 	
 	public LoginPanel(){
 		super("Patient Portal");
-		setLayout(new FlowLayout());
+		//setLayout(new FlowLayout());
+		
+		loginLayout = new GridLayout(6, 0, 0, 5); //initial home screen layout
+		infoLayout = new GridLayout(10, 2, 0, 1); // new user layout
+		patientLayout = new GridLayout(2, 0, 0, 1);
+		logo = new ImageIcon("src/panel/pppicture.png");
+		panel = new JPanel(); // initial home screen panel
+		logoPanel = new JPanel();
+		newUserPanel = new JPanel();
+		patientPanel = new JPanel();
+		scheduleAppt = new JButton("Schedule Appointment");
+		
+		logoButton = new JButton();
+		newUser = new JButton("New User");
+		login = new JButton("Login");
+		submit = new JButton("Submit");
+		
+		title = new JLabel("Welcome to the Patient Portal System!", SwingConstants.CENTER);
+		descriptionOne = new JLabel("If you are new to the system, please click \"NewUser\" to create an account", SwingConstants.CENTER);
+		descriptionTwo = new JLabel("Otherwise, please click \"Login\"", SwingConstants.CENTER);
+		nameOne = new JLabel("First Name:");
+		nameTwo = new JLabel("Last Name:");
+		emailEnter = new JLabel("Email:");
+		DOB = new JLabel("Date of Birth:");
+		typeEnter = new JLabel("User Type:");
+		usernameEnter = new JLabel("Username:");
+		passwordEnter = new JLabel("Password:");
+		phoneNumberEnter = new JLabel("Phone Number:");
+		addressEnter = new JLabel("Address:");
+		firstName = new JTextField(smallTxt);
+		lastName = new JTextField(smallTxt);
+		email = new JTextField(smallTxt);
+		birthday = new JTextField(smallTxt);
+		userName = new JTextField(smallTxt);
+		phoneNumber = new JTextField(smallTxt);
+		address = new JTextField(smallTxt);
+		password = new JPasswordField(smallTxt);
+		types = new String[]{"Patient", "Doctor", "Nurse", "Staff"};
+		userType = new JComboBox<String>(types);
 
 		int scale = 2;
 		int width = logo.getIconWidth();
@@ -94,6 +136,8 @@ public class LoginPanel extends JFrame{
 		newUserPanel.add(lastName);
 		newUserPanel.add(emailEnter);
 		newUserPanel.add(email);
+		newUserPanel.add(DOB);
+		newUserPanel.add(birthday);
 		newUserPanel.add(typeEnter);
 		newUserPanel.add(userType);
 		newUserPanel.add(usernameEnter);
@@ -209,6 +253,11 @@ public class LoginPanel extends JFrame{
 		return email.getText();
 	}
 	
+	public String getNewUserDOB()
+	{
+		return birthday.getText();
+	}
+	
 	public String getNewUserAddress(){
 		return address.getText();
 	}
@@ -288,9 +337,9 @@ public class LoginPanel extends JFrame{
 	public void invalidPhoneNumber(){
 		JOptionPane.showMessageDialog(loginPanel, "Phone Number must "
 				+ "have one of the following formats:\n"
-				+ "1. 111222333\n"
-				+ "2. 111-222-333\n"
-				+ "3. 1-222-333-444");
+				+ "1. 1112223333\n"
+				+ "2. 111-222-3333\n"
+				+ "3. 1-222-333-4444");
 	}
 	
 	public JPanel getMainPanel(){

@@ -107,7 +107,8 @@ public class DoctorView{
 		panel.add(viewCalendar, g);
 		
 		ArrayList<String> tmpArray = new ArrayList<String>();
-		for(int i = 0; i < patientList.size(); i++){
+		for(int i = 0; i < patientList.size(); i++)
+		{
 			tmpArray.add((patientList.get(i).getFirstName().concat
 					(" ".concat(patientList.get(i).getLastName()))));
 		}
