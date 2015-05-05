@@ -22,6 +22,7 @@ public class PatientModel extends UserModel {
 		this.userName = userName;
 		if (otherPassword != null) {
 			String tmpPassword = new String(otherPassword);
+			System.out.println(tmpPassword);
 			this.password = tmpPassword;
 		}
 		this.email = email;

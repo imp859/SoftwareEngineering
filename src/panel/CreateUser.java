@@ -26,12 +26,14 @@ public class CreateUser {
 	private ArrayList<UserModel> users;
 	private JCalendar calendar;
 	private JDateChooser dateChooser;
+	private Gateway gateway;
 	
-	public CreateUser(LoginPanel lp, ArrayList<UserModel> users){
+	public CreateUser(LoginPanel lp, ArrayList<UserModel> users, Gateway gateway){
 		loginPanel = lp;
 		this.users = users;
 		calendar = new JCalendar();
 		dateChooser = new JDateChooser();
+		this.gateway = gateway;
 	
 	}
 	
@@ -58,6 +60,9 @@ public class CreateUser {
 	public DoctorModel createDoctor(){
 		DoctorModel dm = new DoctorModel(loginPanel.getNewFirstName(), loginPanel.getNewLastName(),
 				loginPanel.getNewUserName(), loginPanel.getNewPassword(), loginPanel.getNewUserEmail(),
+				loginPanel.getNewUserPhoneNum(), loginPanel.getNewUserAddress());
+		gateway.insertDB(dm.getUserType(),loginPanel.getNewFirstName(), loginPanel.getNewLastName(),
+				loginPanel.getNewUserName(), dm.getPassword(), loginPanel.getNewUserEmail(),
 				loginPanel.getNewUserPhoneNum(), loginPanel.getNewUserAddress());
 		return dm;
 	}

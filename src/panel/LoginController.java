@@ -21,10 +21,11 @@ public class LoginController implements ActionListener {
 	private int index;
 	
 	//passed the home screen view and arraylist of users
-	public LoginController(LoginPanel otherView, ArrayList otherUserModel) {
+	public LoginController(LoginPanel otherView, ArrayList<UserModel> otherUserModel,
+			Gateway gateway) {
 		this.view = otherView; // assign this view to the view that was passed
 		session = new Session(); //create new session
-		createUser = new CreateUser(otherView, otherUserModel);
+		createUser = new CreateUser(otherView, otherUserModel, gateway);
 		this.users = otherUserModel;
 		auth = new Authenticator(otherView, otherUserModel);
 	}
@@ -114,7 +115,6 @@ public class LoginController implements ActionListener {
 			view.getLoginPanel().setVisible(false);
 			view.getPatientPanel().setVisible(false);
 			// log out the user when they hit the home button
-			//session.logOut();
 		}
 	}
 
