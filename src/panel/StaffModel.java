@@ -12,10 +12,11 @@ public class StaffModel extends UserModel {
 	private String appt;
 	private String firstname, lastname, password, userName, email, address, phoneNum,
 					userMessage, patient;
+	private Gateway gateway;
 
 	// eventually all textfield info from view will be passed into constructor
 	public StaffModel(String firstName, String lastName, String userName,
-			char[] otherPassword, String email, String address, String phoneNum) {
+			char[] otherPassword, String email, String address, String phoneNum, Gateway g) {
 		// TODO enforce better constraints
 		this.firstname = firstName;
 		this.lastname = lastName;
@@ -27,6 +28,7 @@ public class StaffModel extends UserModel {
 		this.email = email;
 		this.address = address;
 		this.phoneNum = phoneNum;
+		this.gateway = g;
 	}
 
 	public void setPassword(String otherPassword) {
@@ -97,6 +99,7 @@ public class StaffModel extends UserModel {
 	
 	public void setMessage(String message){
 		this.userMessage = message;
+		gateway.updateMessage(this.userMessage, this.userName);
 	}
 	
 	public String getUserMessage(){

@@ -12,22 +12,23 @@ public class PatientModel extends UserModel {
 	private String appt;
 	private String firstname, lastname, password, userName, email, address, phoneNum,
 					userMessage;
-
+	private Gateway gateway;
+	
 	// eventually all textfield info from view will be passed into constructor
 	public PatientModel(String firstName, String lastName, String userName,
-			char[] otherPassword, String email, String address, String phoneNum) {
+			char[] otherPassword, String email, String address, String phoneNum, Gateway g) {
 		// TODO enforce better constraints
 		this.firstname = firstName;
 		this.lastname = lastName;
 		this.userName = userName;
 		if (otherPassword != null) {
 			String tmpPassword = new String(otherPassword);
-			System.out.println(tmpPassword);
 			this.password = tmpPassword;
 		}
 		this.email = email;
 		this.address = address;
 		this.phoneNum = phoneNum;
+		gateway = g;
 	}
 
 	public void setPassword(String otherPassword) {
@@ -98,6 +99,7 @@ public class PatientModel extends UserModel {
 	
 	public void setMessage(String message){
 		this.userMessage = message;
+		gateway.updateMessage(this.userMessage, this.userName);
 	}
 	
 	public String getUserMessage(){
@@ -121,5 +123,6 @@ public class PatientModel extends UserModel {
 		String tmp1 = date.substring(0, 10);
 		String tmp2 = date.substring(24, 28);
 		appt = tmp1 + " " + tmp2;
+		gateway.updateAppt(appt, this.userName);
 	}
 }

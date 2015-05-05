@@ -38,7 +38,7 @@ public class Gateway {
 				int userType = rs.getInt("type");
 				if(userType == 0){
 					PatientModel pm = new PatientModel(userFirstName, userLastName,
-							userName, passArray, userEmail, userAddress, userPhoneNum);
+							userName, passArray, userEmail, userAddress, userPhoneNum, this);
 					users.add(pm);
 				} else if(userType == 1){
 					DoctorModel dm = new DoctorModel(userFirstName, userLastName,
@@ -50,7 +50,7 @@ public class Gateway {
 					users.add(nm);
 				} else if(userType == 3){
 					StaffModel sm = new StaffModel(userFirstName, userLastName,
-							userName, passArray, userEmail, userAddress, userPhoneNum);
+							userName, passArray, userEmail, userAddress, userPhoneNum, this);
 					users.add(sm);
 				}
 			}
@@ -73,14 +73,39 @@ public class Gateway {
 			ps.setString(5, pw);
 			ps.setString(6, pn);
 			ps.setString(7, add);
-			ps.setString(8, "test");
-			ps.setString(9, "test");
+			ps.setString(8, "");
+			ps.setString(9, "");
 			ps.setInt(10, userType);
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Insert into DB error");
+		}
+	}
+	
+	public void updateAppt(String appt, String user){
+		try {
+			PreparedStatement ps = conn.prepareStatement("update user_table set "
+					+ "appointment = ? where userName = ?");
+			ps.setString(1, appt);
+			ps.setString(2, user);
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println("Update DB error");
+		}
+	}
+	
+	public void updateMessage(String msg, String user){
+		try{
+			PreparedStatement ps = conn.prepareStatement("update user_table set "
+					+ "message = ? where userName = ?");
+			ps.setString(1, msg);
+			ps.setString(2, user);
+			ps.executeUpdate();
+			ps.close();
+		} catch(SQLException e){
+			System.out.println("Update DB error");
 		}
 	}
 	

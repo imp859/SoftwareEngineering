@@ -40,6 +40,9 @@ public class CreateUser {
 	public PatientModel createPatient(){		
 		PatientModel pm = new PatientModel(loginPanel.getNewFirstName(), loginPanel.getNewLastName(),
 				loginPanel.getNewUserName(), loginPanel.getNewPassword(), loginPanel.getNewUserEmail(),
+				loginPanel.getNewUserPhoneNum(), loginPanel.getNewUserAddress(), gateway);
+		gateway.insertDB(pm.getUserType(), loginPanel.getNewFirstName(), loginPanel.getNewLastName(),
+				loginPanel.getNewUserName(), pm.getPassword(), loginPanel.getNewUserEmail(),
 				loginPanel.getNewUserPhoneNum(), loginPanel.getNewUserAddress());
 		return pm;
 	}
@@ -92,6 +95,9 @@ public class CreateUser {
 		NurseModel nm = new NurseModel(loginPanel.getNewFirstName(), loginPanel.getNewLastName(),
 				loginPanel.getNewUserName(), loginPanel.getNewPassword(), loginPanel.getNewUserEmail(),
 				loginPanel.getNewUserPhoneNum(), loginPanel.getNewUserAddress());
+		gateway.insertDB(nm.getUserType(), loginPanel.getNewFirstName(), loginPanel.getNewLastName(),
+				loginPanel.getNewUserName(), nm.getPassword(), loginPanel.getNewUserEmail(),
+				loginPanel.getNewUserPhoneNum(), loginPanel.getNewUserAddress());
 		return nm;
 	}
 	
@@ -116,6 +122,9 @@ public class CreateUser {
 	public StaffModel createStaff(){
 		StaffModel sm = new StaffModel(loginPanel.getNewFirstName(), loginPanel.getNewLastName(),
 				loginPanel.getNewUserName(), loginPanel.getNewPassword(), loginPanel.getNewUserEmail(),
+				loginPanel.getNewUserPhoneNum(), loginPanel.getNewUserAddress(), gateway);
+		gateway.insertDB(sm.getUserType(), loginPanel.getNewFirstName(), loginPanel.getNewLastName(),
+				loginPanel.getNewUserName(), sm.getPassword(), loginPanel.getNewUserEmail(),
 				loginPanel.getNewUserPhoneNum(), loginPanel.getNewUserAddress());
 		return sm;
 	}
