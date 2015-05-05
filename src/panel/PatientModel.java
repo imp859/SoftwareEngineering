@@ -11,11 +11,12 @@ public class PatientModel extends UserModel {
 
 	private String appt;
 	private String firstname, lastname, password, userName, email, address, phoneNum,
-					userMessage;
+					userMessage, DOB;
+	private MedicalChart medChart;
 
 	// eventually all textfield info from view will be passed into constructor
 	public PatientModel(String firstName, String lastName, String userName,
-			char[] otherPassword, String email, String address, String phoneNum) {
+			char[] otherPassword, String email, String address, String phoneNum, String birthday) {
 		// TODO enforce better constraints
 		this.firstname = firstName;
 		this.lastname = lastName;
@@ -27,6 +28,7 @@ public class PatientModel extends UserModel {
 		this.email = email;
 		this.address = address;
 		this.phoneNum = phoneNum;
+		this.DOB = birthday;
 	}
 
 	public void setPassword(String otherPassword) {
@@ -120,4 +122,20 @@ public class PatientModel extends UserModel {
 		appt = date;
 		System.out.println(appt);
 	}
+	
+	public String getDOB()
+	{
+		return DOB;
+	}
+	
+	public void createMedicalChart()
+	{
+		medChart = new MedicalChart(this);
+	}
+	
+	public MedicalChart getChart()
+	{
+		return medChart;
+	}
+	
 }

@@ -10,6 +10,7 @@ public class DoctorModel extends UserModel{
 
 	private String appt;
 	private String firstname, lastname, password, userName, email, address, phoneNum;
+	private PatientModel currentPatient;
 	
 	public DoctorModel(String firstName, String lastName, String userName,
 			char[] otherPassword, String email, String address, String phoneNum){
@@ -27,6 +28,16 @@ public class DoctorModel extends UserModel{
 
 	public void testFunction(){
 		
+	}
+	
+	public PatientModel getPatient()
+	{
+		return currentPatient;
+	}
+	
+	public void setPatient(PatientModel patient)
+	{
+		this.currentPatient = patient;
 	}
 	
 	@Override
