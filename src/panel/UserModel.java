@@ -10,9 +10,6 @@ package panel;
 
 public abstract class UserModel {
 	
-	// users trying to create an account as a doctor will have to enter this doctor id
-	protected String doctorID = "123";
-	
 	public abstract int getUserType();
 	public abstract void addUser(String name, String password);
 	public abstract String getFirstName();

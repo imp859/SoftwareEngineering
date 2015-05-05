@@ -26,7 +26,7 @@ public class DoctorView{
 	
 	// constructor passes in the patients information
 	public DoctorView(String userNameText, String firstName, String lastName,
-			String passWord, String email, ArrayList<UserModel> patientList) {
+			String passWord, String email, ArrayList<PatientModel> patientList) {
 		
 		mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setBackground(Color.WHITE);
@@ -108,7 +108,8 @@ public class DoctorView{
 		
 		ArrayList<String> tmpArray = new ArrayList<String>();
 		for(int i = 0; i < patientList.size(); i++){
-			tmpArray.add(patientList.get(i).getUserName());
+			tmpArray.add((patientList.get(i).getFirstName().concat
+					(" ".concat(patientList.get(i).getLastName()))));
 		}
 		
 		westPanel = new JPanel();
