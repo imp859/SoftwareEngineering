@@ -24,7 +24,7 @@ public class MedicalChartController implements ActionListener, WindowListener
 		{
 			// TODO
 		} 
-		else if(e.getActionCommand().equals("Update Chart"))
+		else if(e.getActionCommand().equals("Change Password"))
 		{
 			// TODO
 		}

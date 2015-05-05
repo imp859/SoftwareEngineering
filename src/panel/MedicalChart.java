@@ -1,94 +1,53 @@
 package panel;
 
-import java.util.regex.Pattern;
+import java.awt.*;
 
-public class MedicalChart
+import javax.swing.*;
+
+public class MedicalChart extends JFrame
 {
-	private String first;
-	private String last;
-	private String sex;
-	private String birthday ;
-	private String history;
-	private double pressure;
-	private double bpm;
-	private double temp;
-	private double hgt;
-	private double wgt;
+	private int shortLineLength = 10;
+	private int longLineLength = 25;
+	private int defaultCols = 50;
+	private int defaultRows = 5;
 	
+	private GridLayout medicalChart = new GridLayout(17, 2);
+	private JPanel panel = new JPanel();
+	private JPanel medicalPanel = new JPanel();
 	
-	public MedicalChart(PatientModel patient)
+	//medical chart labels
+	private JLabel patientFirst = new JLabel("First");
+    private JLabel patientLast = new JLabel("Last");
+    private JLabel doctorFirst = new JLabel("Dr.");
+    //private JLabel doctorLast = new JLabel("");
+    private JLabel sex = new JLabel("Gender");
+    private JLabel birthday = new JLabel("DOB");
+    private JLabel pressure = new JLabel("Pressure");
+    private JLabel bpm = new JLabel("Heart Rate");
+    private JLabel temp = new JLabel("Temperature");
+    private JLabel hgt = new JLabel("Height");
+    private JLabel wgt = new JLabel("Weight");
+    private JLabel reason= new JLabel("Reason For Visit:");
+    private JLabel history= new JLabel("Patient History");
+	
+    //medical chart fields
+	private JTextField patientFirstName = new JTextField(longLineLength);
+	private JTextField patientLastName = new JTextField(longLineLength);
+	private JTextField doctorFirstName = new JTextField(longLineLength);
+	private JTextField doctorLastName = new JTextField(longLineLength);
+	private JTextField gender = new JTextField(shortLineLength);
+	private JTextField birthDate = new JTextField(longLineLength);
+	private JTextField bloodPressure = new JTextField(longLineLength);
+	private JTextField pulse = new JTextField(longLineLength);
+	private JTextField temperature = new JTextField(longLineLength);
+	private JTextField height = new JTextField(shortLineLength);
+	private JTextField weight = new JTextField(shortLineLength);
+	private JTextArea reasonForVisit= new JTextArea(defaultRows, defaultCols);
+	private JTextArea patientHistory= new JTextArea(defaultRows, defaultCols);
+	
+	public void registerListeners(MedicalChartController mc)
 	{
-		first = new String(patient.getFirstName());
-		last = new String(patient.getLastName());
-		sex = new String("");
-		setBirthday(new String(patient.getDOB()));
-		history = new String("");
+		
 	}
 	
-	public String getSex()
-	{
-		return sex;
-	}
-	
-	public void setSex(String gender)
-	{
-		sex = gender;
-	}
-	
-	public void addHistory(String newHistory)
-	{
-		history.concat((newHistory.concat("\n\n")));
-	}
-	
-	public double getHeight ()
-	{
-		return hgt;
-	}
-	
-	public void setHeight (String height)
-	{
-		Pattern std = Pattern.compile("\"|\'");
-		String[] tmp = std.split(height);
-		hgt = (12.0 * Integer.parseInt(tmp[0]) + Double.parseDouble(tmp[1]));
-	}
-	
-	public String getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
-
-	public double getPressure() {
-		return pressure;
-	}
-
-	public void setPressure(double pressure) {
-		this.pressure = pressure;
-	}
-
-	public double getBpm() {
-		return bpm;
-	}
-
-	public void setBpm(double bpm) {
-		this.bpm = bpm;
-	}
-
-	public double getTemp() {
-		return temp;
-	}
-
-	public void setTemp(double temp) {
-		this.temp = temp;
-	}
-
-	public double getWeight() {
-		return wgt;
-	}
-
-	public void setWeight(double wgt) {
-		this.wgt = wgt;
-	}
 }
