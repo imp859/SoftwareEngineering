@@ -16,7 +16,7 @@ public class PatientModel extends UserModel {
 
 	// eventually all textfield info from view will be passed into constructor
 	public PatientModel(String firstName, String lastName, String userName,
-			char[] otherPassword, String email, String address, String phoneNum, String birthday) {
+			char[] otherPassword, String email, String address, String phoneNum) {
 		// TODO enforce better constraints
 		this.firstname = firstName;
 		this.lastname = lastName;
@@ -28,7 +28,7 @@ public class PatientModel extends UserModel {
 		this.email = email;
 		this.address = address;
 		this.phoneNum = phoneNum;
-		this.DOB = birthday;
+		//this.DOB = birthday;
 	}
 
 	public void setPassword(String otherPassword) {

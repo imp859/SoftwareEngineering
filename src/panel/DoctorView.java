@@ -7,7 +7,9 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 
+
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 
 
 public class DoctorView{
@@ -26,7 +28,7 @@ public class DoctorView{
 	
 	// constructor passes in the patients information
 	public DoctorView(String userNameText, String firstName, String lastName,
-			String passWord, String email, ArrayList<PatientModel> patientList) {
+			String passWord, String email, ArrayList<UserModel> patientList) {
 		
 		mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setBackground(Color.WHITE);
@@ -131,6 +133,7 @@ public class DoctorView{
 		this.updateInfo.addActionListener(dc);
 		this.changePassword.addActionListener(dc);
 		this.viewCalendar.addActionListener(dc);
+		this.patients.addListSelectionListener(new ListSelectionListener());
 	}
 	
 	public JPanel getPanel(){

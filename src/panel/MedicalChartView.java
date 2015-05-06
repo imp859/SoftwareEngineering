@@ -80,9 +80,4 @@ public class MedicalChartView
 		patientHistory = new JTextArea(defaultRows, defaultCols);
 	}
 	
-	public void registerListeners(MedicalChartController mc)
-	{
-		// do something
-	}
-	
 }
